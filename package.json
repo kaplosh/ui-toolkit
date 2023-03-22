@@ -1,0 +1,25 @@
+{
+  "name": "@ema/ui-toolkit",
+  "version": "0.0.1",
+  "description": "shared components & tools for EMA uis",
+  "author": "doooby <zelazk.o@email.cz>",
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "main": "./lib/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PIN-EMA/ui-toolkit.git"
+  },
+  "scripts": {
+    "showcase": "vite showcase -c showcase/vite.config.ts --no-clearScreen"
+  },
+  "dependencies": {
+    "typescript": "^5.0.2",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vue-tsc": "^1.2.0"
+  }
+}

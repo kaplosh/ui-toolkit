@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [ "ESNext", "DOM" ],
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "~": [ "." ],
+      "@ema/ui-toolkit": [ "src" ]
+    },
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
