@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
-import Stack from './components/Stack.vue'
+import { createApp } from 'vue';
+import StackRoot from './components/StackRoot.vue';
 
-createApp(Stack).mount('#app')
+createApp(StackRoot).mount('#app');
