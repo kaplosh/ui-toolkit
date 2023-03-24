@@ -3,16 +3,25 @@ module.exports = {
   env: {
     browser: true,
   },
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    parser: '@typescript-eslint/parser',
+    sourceType: "module",
+    ecmaVersion: "latest",
+    ecmaFeatures: {
+      "jsx": true
+    }
   },
+  plugins: ['@typescript-eslint'],
   extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-recommended',
   ],
   rules: {
     'import/order': [ 'off' ],
     semi: [ 'error', 'always' ],
+    quotes: [ "error", "single" ],
     'object-curly-spacing': [ 'error', 'always' ],
     'array-bracket-spacing': [ 'error', 'always' ],
     'comma-dangle': [ 'error', 'always-multiline' ],
