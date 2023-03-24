@@ -1,10 +1,17 @@
 <template>
-  <input type="text">
+  <input type="text" v-model="inputFieldData">
 </template>
 
-<script>
+<script setup lang="ts">
+
 export default {
   name: "InputField",
+  data () {
+    return {
+      inputFieldData: "",
+
+    };
+  },
 };
 </script>
 
