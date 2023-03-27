@@ -1,5 +1,9 @@
 <script lang="ts" setup="">
-
+  import { ui } from '../../../lib';
+  const { InputField } = ui.controls;
+  function onChange(value) {
+    console.log(value);
+  }
 </script>
 
 <template>
@@ -10,13 +14,19 @@
     </h2>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
-        case a)
+        <InputField value="" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        case b)
+        <InputField
+          value=""
+          placeholder="Input filet"
+        />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        case c)
+        <InputField
+          value=""
+          :disabled="true"
+        />
       </div>
     </div>
   </div>
