@@ -31,6 +31,8 @@ export default {
 <template>
   <input
     :id="domId"
+    :value="internalValue"
+    @input="onimu"
     v-model="internalValue"
     type="text"
     :placeholder="placeholder"
