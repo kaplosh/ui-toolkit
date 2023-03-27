@@ -1,5 +1,5 @@
 <script lang="ts" setup="">
-  import { ui } from '../../../lib';
+  import { ui } from '@ema/ui-toolkit';
   const { InputField } = ui.controls;
   function onChange(value) {
     console.log(value);

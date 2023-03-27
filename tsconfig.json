@@ -12,7 +12,7 @@
     "baseUrl": ".",
     "paths": {
       "~": [ "." ],
-      "@ema/ui-toolkit": [ "src" ]
+      "@ema/ui-toolkit": [ "lib" ]
     },
   },
   "exclude": [
