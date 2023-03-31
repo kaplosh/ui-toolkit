@@ -1,9 +1,5 @@
 <script lang="ts" setup="">
   import { ui } from '@ema/ui-toolkit';
-  const { InputField } = ui.controls;
-  function onChange(value) {
-    console.log(value);
-  }
 </script>
 
 <template>
@@ -14,16 +10,19 @@
     </h2>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
-        <InputField value="" />
+        base:
+        <ui.controls.InputField value="" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        <InputField
+        placeholder:
+        <ui.controls.InputField
           value=""
           placeholder="Input filet"
         />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        <InputField
+        disabled:
+        <ui.controls.InputField
           value=""
           :disabled="true"
         />

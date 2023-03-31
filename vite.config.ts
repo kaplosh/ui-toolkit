@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [ vue() ],
   resolve: {
     alias: {
-      '@ema/ui-toolkit': path.resolve(__dirname, '../../lib'),
+      '@ema/ui-toolkit': path.resolve(__dirname, 'lib'),
     },
   },
 });

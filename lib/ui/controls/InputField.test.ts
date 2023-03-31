@@ -9,6 +9,4 @@ describe('InputField', () => {
     });
     expect(wrapper.attributes().placeholder).toEqual('kkk');
   } );
-
-
 });
