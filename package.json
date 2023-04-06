@@ -14,15 +14,16 @@
     "showcase": "vite showcase -c vite.config.ts --no-clearScreen"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
+    "jsdom": "^21.1.1",
     "typescript": "^5.0.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@testing-library/vue": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vitejs/plugin-vue": "^4.1.0",
-    "@vue/test-utils": "^2.3.2",
-    "bootstrap": "^5.2.3",
     "eslint": "^8.36.0",
     "eslint-plugin-vue": "^9.9.0",
     "sass": "^1.60.0",
