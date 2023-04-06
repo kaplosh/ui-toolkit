@@ -10,5 +10,8 @@ export default defineConfig({
       '@ema/ui-toolkit': path.resolve(__dirname, 'lib'),
     },
   },
+  test: {
+    environment: 'jsdom',
+  },
 });
 
