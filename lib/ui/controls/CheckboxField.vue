@@ -6,6 +6,7 @@ export default {
     values: { type: Array as PropType<string>, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: false },
+    counter: { type: Boolean as PropType<boolean>, default: false },
 
   },
   data () {
@@ -22,6 +23,15 @@ export default {
     onBlur() {
       this.$emit('change', this.internalValues);
     },
+    onClick() {
+      if(this.counter === true) {
+        if(this.internalValues.length >= 2) {
+          this.prop.disabled = true;
+        }else {
+          this.prop.disabled = false;
+        }
+      }
+    },
   },
 };
 </script>
@@ -33,6 +43,7 @@ export default {
     type="checkbox"
     value="one"
     :disabled="disabled"
+    @click="onClick"
   >
   <label for="jack">One</label>
 
@@ -42,6 +53,7 @@ export default {
     type="checkbox"
     value="two"
     :disabled="disabled"
+    @click="onClick"
   >
   <label for="john">Two</label>
 
@@ -51,6 +63,27 @@ export default {
     type="checkbox"
     value="three"
     :disabled="disabled"
+    @click="onClick"
   >
   <label for="mike">Three</label>
+
+  <input
+    id="option four"
+    v-model="internalValues"
+    type="checkbox"
+    value="four"
+    :disabled="disabled"
+    @click="onClick"
+  >
+  <label for="mike">Four</label>
+
+  <input
+    id="option five"
+    v-model="internalValues"
+    type="checkbox"
+    value="five"
+    :disabled="disabled"
+    @click="onClick"
+  >
+  <label for="mike">Five</label>
 </template>
