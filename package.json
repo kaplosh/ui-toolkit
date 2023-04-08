@@ -1,6 +1,6 @@
 {
   "name": "@ema/ui-toolkit",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "shared components & tools for EMA uis",
   "author": "doooby <zelazk.o@email.cz>",
   "license": "GPL-3.0-only",
