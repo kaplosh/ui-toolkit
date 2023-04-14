@@ -37,4 +37,5 @@ export default {
     :disabled="disabled"
     @blur="onBlur"
   >
+  <div>{{ internalValue }}</div>
 </template>

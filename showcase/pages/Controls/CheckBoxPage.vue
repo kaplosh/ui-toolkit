@@ -14,10 +14,6 @@
         <ui.controls.CheckBoxField value="" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        placeholder:
-        <ui.controls.CheckBoxField value="" :counter="true" />
-      </div>
-      <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
         <ui.controls.CheckBoxField value="" disabled="true"/>
       </div>

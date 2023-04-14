@@ -34,7 +34,7 @@ export default {
     value="one"
     :disabled="disabled"
   >
-  <label for="jack">One</label>
+  <label for="one">One</label>
 
   <input
     id="radio option"
@@ -43,7 +43,7 @@ export default {
     value="two"
     :disabled="disabled"
   >
-  <label for="john">Two</label>
+  <label for="two">Two</label>
 
   <input
     id="radio option"
@@ -52,5 +52,6 @@ export default {
     value="three"
     :disabled="disabled"
   >
-  <label for="mike">Three</label>
+  <label for="three">Three</label>
+  <div>{{ internalValue }}</div>
 </template>

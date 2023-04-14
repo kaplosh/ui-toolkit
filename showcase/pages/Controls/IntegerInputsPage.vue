@@ -11,15 +11,15 @@
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
         base:
-        <ui.controls.NumberInputField value="" />
+        <ui.controls.IntegerInputField value="" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         placeholder:
-        <ui.controls.NumberInputField value="" placeholder="Number filet" />
+        <ui.controls.IntegerInputField value="" placeholder="Number filet" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
-        <ui.controls.NumberInputField value="" disabled="true"/>
+        <ui.controls.IntegerInputField value="" disabled="true"/>
       </div>
     </div>
   </div>

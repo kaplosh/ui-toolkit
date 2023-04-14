@@ -25,10 +25,10 @@ export default {
       this.$emit('change', this.internalValue);
     },
     onInput() {
-      this.internalValue = Number(this.internalValue);
       if(isNaN(this.internalValue)) {
-        this.internalValue = '';
+        this.internalValue = this.internalValue.slice(0,-1);
       }
+      this.internalValue = Number(this.internalValue);
     },
   },
 };
@@ -44,4 +44,5 @@ export default {
     @blur="onBlur"
     @input="onInput"
   >
+  <div>{{ internalValue }}</div>
 </template>
