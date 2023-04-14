@@ -35,7 +35,7 @@ export default {
       type="checkbox"
       value="one"
       :disabled="disabled"
-      @click="onClick"
+
     >
     <label for="jack">One</label>
 
@@ -45,7 +45,7 @@ export default {
       type="checkbox"
       value="two"
       :disabled="disabled"
-      @click="onClick"
+
     >
     <label for="john">Two</label>
 
@@ -55,7 +55,7 @@ export default {
       type="checkbox"
       value="three"
       :disabled="disabled"
-      @click="onClick"
+
     >
     <label for="mike">Three</label>
 
@@ -65,7 +65,7 @@ export default {
       type="checkbox"
       value="four"
       :disabled="disabled"
-      @click="onClick"
+
     >
     <label for="mike">Four</label>
 
@@ -75,7 +75,7 @@ export default {
       type="checkbox"
       value="five"
       :disabled="disabled"
-      @click="onClick"
+
     >
     <label for="mike">Five</label>
   </div>
