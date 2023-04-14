@@ -19,7 +19,7 @@
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
-        <ui.controls.IntegerInputField value="" disabled="true"/>
+        <ui.controls.IntegerInputField value="" :disabled="true"/>
       </div>
     </div>
   </div>

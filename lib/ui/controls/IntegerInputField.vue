@@ -22,16 +22,19 @@ export default {
   },
   methods: {
     onBlur() {
+      this.internalValue = Number(this.internalValue);
+      console.log('emited', typeof this.internalValue);
       this.$emit('change', this.internalValue);
     },
     onInput() {
       if(isNaN(this.internalValue)) {
         this.internalValue = this.internalValue.slice(0,-1);
       }
-      this.internalValue = Number(this.internalValue);
+      console.log('type of', typeof this.internalValue);
+      //this.internalValue = Number(this.internalValue);
+      },
     },
-  },
-};
+  };
 </script>
 
 <template>
