@@ -1,5 +1,17 @@
 <script lang="ts" setup="">
   import { ui } from '@ema/ui-toolkit';
+  /*export default {
+    data () {
+      return {
+        showedValue: '',
+      };
+    },
+    methods: {
+      onChange(text) {
+        return this.showedValue = text;
+      },
+    },
+  }; */
 </script>
 
 <template>
@@ -11,7 +23,11 @@
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
         base:
-        <ui.controls.InputField value="" />
+        <ui.controls.InputField
+          value=""
+        />
+        <div>
+        </div>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         placeholder:
