@@ -1,9 +1,10 @@
 <script lang="ts">
-import { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
-export default {
+export default defineComponent({
+  inheritAttrs: false,
   props: {
-    value: { type: String as PropType<string>, required: true },
+    value: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     placeholder: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: false },
@@ -25,7 +26,7 @@ export default {
       this.$emit('change', this.internalValue);
     },
   },
-};
+});
 </script>
 
 <template>
