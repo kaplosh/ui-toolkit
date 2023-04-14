@@ -2,10 +2,8 @@
   import { ui } from '@ema/ui-toolkit';
   import { ref } from 'vue';
   const value1 = ref(56);
+  const value2 = ref(69);
 
-  function aaa (a, b) {
-    console.log(a, b);
-  }
 </script>
 
 <template>
@@ -16,7 +14,7 @@
     </h2>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
-        base:
+        integer:
         <ui.controls.IntegerInput
           :value="value1"
           @change="value1=$event"
@@ -24,8 +22,12 @@
         <div>{{ value1 }}</div>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
-        placeholder:
-        <!--        <ui.controls.IntegerInputField value="" placeholder="Number filet" />-->
+        number:
+        <ui.controls.NumberInput
+          :value="value2"
+          @change="value2=$event"
+        />
+        <div>{{ value2 }}</div>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
