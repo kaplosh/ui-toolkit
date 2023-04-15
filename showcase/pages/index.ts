@@ -5,6 +5,7 @@ import Controls_NumberInputsPage from './Controls/IntegerInputsPage.vue';
 import Controls_CheckBoxPage from './Controls/CheckBoxPage.vue';
 import Controls_MultilineInputPage from './Controls/MultilineInputPage.vue';
 import Controls_RadioInput from './Controls/RadioInputPage.vue';
+import Controls_TranslateTable from './Controls/TranslateTable.vue';
 import HomePage from './HomePage.vue';
 
 interface Page {
@@ -19,6 +20,7 @@ export const pages = {
   Controls_CheckBoxField: page('/controls/check-box-inputs', Controls_CheckBoxPage),
   Controls_MultilineInputPage: page('controls/multiline-inputs', Controls_MultilineInputPage),
   Controls_RadioInputPage: page('controls/radio-inputs', Controls_RadioInput),
+  Controls_TranslateTable: page('controls/translate-table', Controls_TranslateTable),
 };
 
 function page(pathname: string, component: Component): Page {
