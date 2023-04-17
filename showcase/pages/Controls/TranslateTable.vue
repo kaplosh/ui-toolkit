@@ -4,9 +4,9 @@ import { ref } from 'vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
-  { key: 'db.record.person.age', translation: 'age', action: '...' },
+  { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
-const value1 = ref('');
+const value1 = ref('Text');
 
 </script>
 
@@ -30,18 +30,16 @@ const value1 = ref('');
           :key="item.key"
         >
           <td>{{ item.key }}</td>
-          <td>{{ item.translation }}</td>
-          <td>{{ item.key }}</td>
+          <td>
+            <ui.controls.InputForTable
+              :value="item.translation"
+              @change="item.translation=$event"
+            />
+          </td>
+          <td>{{ item.actions }}</td>
         </tr>
       </tbody>
     </table>
-    <div>
-      <ui.controls.InputField
-        :value="value1"
-        @change="value1=$event"
-      />
-      {{ value1 }}
-    </div>
   </div>
 </template>
 

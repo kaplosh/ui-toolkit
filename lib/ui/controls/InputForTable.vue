@@ -13,6 +13,8 @@ export default defineComponent({
   data () {
     return {
       internalValue: this.value,
+      showInputField: false,
+      showInternalValue: true,
 
     };
   },
@@ -24,6 +26,13 @@ export default defineComponent({
   methods: {
     onBlur() {
       this.$emit('change', this.internalValue);
+      this.showInputField = false;
+      this.showInternalValue = true;
+    },
+    onClick(){
+      this.showInputField = true;
+      this.showInternalValue = false;
+
     },
   },
 });
@@ -31,11 +40,20 @@ export default defineComponent({
 
 <template>
   <input
+    v-if="showInputField"
     :id="domId"
     v-model="internalValue"
     type="text"
     :placeholder="placeholder"
     :disabled="disabled"
     @blur="onBlur"
+    @keydown.enter="onBlur"
   >
+  <div
+    v-if="showInternalValue"
+    class="clickable-text"
+    @click="onClick"
+  >
+    {{ internalValue }}
+  </div>
 </template>
