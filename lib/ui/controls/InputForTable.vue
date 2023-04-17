@@ -49,6 +49,8 @@ export default defineComponent({
     @blur="onBlur"
     @keydown.enter="onBlur"
   >
+  <button v-if="showInputField" class="btn-outline-success" @click="onBlur">Update</button>
+  <button v-if="showInputField" class="btn-outline-danger" @click="onBlur">Close</button>
   <div
     v-if="showInternalValue"
     class="clickable-text"
