@@ -1,17 +1,13 @@
-<script lang="ts">
+<script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-export default {
-  name: 'TranslateTable',
-  data () {
-    return {
-      items: [
-        { key: 'db.record.person.name', translation: 'name', actions: '...' },
-        { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
-        { key: 'db.record.person.age', translation: 'age', actions: '...' },
-      ],
-    };
-  },
-};
+import { ref } from 'vue';
+const items = ref([
+  { key: 'db.record.person.name', translation: 'name', actions: '...' },
+  { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
+  { key: 'db.record.person.age', translation: 'age', action: '...' },
+]);
+const value1 = ref('');
+
 </script>
 
 
@@ -39,6 +35,13 @@ export default {
         </tr>
       </tbody>
     </table>
+    <div>
+      <ui.controls.InputField
+        :value="value1"
+        @change="value1=$event"
+      />
+      {{ value1 }}
+    </div>
   </div>
 </template>
 
