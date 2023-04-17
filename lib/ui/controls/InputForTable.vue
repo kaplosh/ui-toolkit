@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
+import { ref } from 'vue';
+
 export default defineComponent({
   inheritAttrs: false,
   props: {
@@ -13,6 +15,7 @@ export default defineComponent({
   data () {
     return {
       internalValue: this.value,
+      inputValue: this.internalValue,
       showInputField: false,
       showInternalValue: true,
 
@@ -24,15 +27,24 @@ export default defineComponent({
     },
   },
   methods: {
-    onBlur() {
-      this.$emit('change', this.internalValue);
+    onSubmit() {
+      if(this.inputValue !== this.internalValue) {
+        this.$emit('change', this.internalValue);
+      }
       this.showInputField = false;
       this.showInternalValue = true;
     },
     onClick(){
       this.showInputField = true;
       this.showInternalValue = false;
-
+      this.$nextTick(() => {
+        this.$refs.inputField.focus();
+      });
+    },
+    onBlur(){
+      this.inputValue = this.internalValue;
+      this.showInputField = false;
+      this.showInternalValue = true;
     },
   },
 });
@@ -42,15 +54,21 @@ export default defineComponent({
   <input
     v-if="showInputField"
     :id="domId"
+    ref="inputField"
     v-model="internalValue"
     type="text"
     :placeholder="placeholder"
     :disabled="disabled"
+    @keydown.enter="onSubmit"
     @blur="onBlur"
-    @keydown.enter="onBlur"
   >
-  <button v-if="showInputField" class="btn-outline-success" @click="onBlur">Update</button>
-  <button v-if="showInputField" class="btn-outline-danger" @click="onBlur">Close</button>
+  <button
+    v-if="showInputField"
+    class="btn-outline-success"
+    @click="onSubmit"
+  >
+    Update
+  </button>
   <div
     v-if="showInternalValue"
     class="clickable-text"
