@@ -1,17 +1,9 @@
 <script lang="ts" setup="">
   import { ui } from '@ema/ui-toolkit';
-  /*export default {
-    data () {
-      return {
-        showedValue: '',
-      };
-    },
-    methods: {
-      onChange(text) {
-        return this.showedValue = text;
-      },
-    },
-  }; */
+  import { ref } from 'vue';
+  const value1 = ref('Text');
+  const value2 = ref('');
+
 </script>
 
 <template>
@@ -24,17 +16,19 @@
       <div class="col-md-6 col-lg-4 col-xl-3">
         base:
         <ui.controls.InputField
-          value=""
+          :value="value1"
+          @change="value1=$event"
         />
-        <div>
-        </div>
+        <div>{{ value1 }}</div>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         placeholder:
         <ui.controls.InputField
-          value=""
+          :value="value2"
           placeholder="Input filet"
+          @change="value2=$event"
         />
+        <div>{{ value2 }}</div>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:

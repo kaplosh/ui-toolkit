@@ -38,5 +38,4 @@ export default defineComponent({
     :disabled="disabled"
     @blur="onBlur"
   >
-  <div>{{ internalValue }}</div>
 </template>
