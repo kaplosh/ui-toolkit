@@ -9,13 +9,14 @@ export default defineComponent({
     value: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     placeholder: { type: String as PropType<string>, default: undefined },
-    disabled: { type: Boolean as PropType<boolean>, default: false },
+    disabled: { type: Boolean as PropType<boolean>, default: true },
 
   },
   data () {
     return {
       internalValue: this.value,
       inputValue: this.internalValue,
+      isDisabled: this.disabled,
       showInputField: false,
       showInternalValue: true,
 
@@ -27,53 +28,41 @@ export default defineComponent({
     },
   },
   methods: {
-    onSubmit() {
+    onSave() {
       if(this.inputValue !== this.internalValue) {
         this.$emit('change', this.internalValue);
       }
-      this.showInputField = false;
-      this.showInternalValue = true;
+      this.isDisabled = true;
     },
-    onClick(){
-      this.showInputField = true;
-      this.showInternalValue = false;
-      this.$nextTick(() => {
-        this.$refs.inputField.focus();
-      });
-    },
-    onBlur(){
-      this.inputValue = this.internalValue;
-      this.showInputField = false;
-      this.showInternalValue = true;
+    onEdit(){
+      this.isDisabled = false;
     },
   },
 });
 </script>
 
 <template>
-  <input
-    v-if="showInputField"
-    :id="domId"
-    ref="inputField"
-    v-model="internalValue"
-    type="text"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    @keydown.enter="onSubmit"
-    @blur="onBlur"
-  >
-  <button
-    v-if="showInputField"
-    class="btn-outline-success"
-    @click="onSubmit"
-  >
-    Update
-  </button>
-  <div
-    v-if="showInternalValue"
-    class="clickable-text"
-    @click="onClick"
-  >
-    {{ internalValue }}
+  <div class="input-group mb-3">
+    <input
+      v-model="internalValue"
+      :disabled="isDisabled"
+      type="text"
+      class="form-control"
+      placeholder="Translation"
+    >
+    <button
+      id="basic-addon1"
+      class="input-group-text"
+      @click="onEdit"
+    >
+      Edit
+    </button>
+    <button
+      id="basic-addon1"
+      class="input-group-text"
+      @click="onSave"
+    >
+      Save
+    </button>
   </div>
 </template>

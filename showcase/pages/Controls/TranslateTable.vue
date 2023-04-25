@@ -21,7 +21,6 @@ const value1 = ref('Text');
         <tr>
           <th>KeY</th>
           <th>Translation</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +35,6 @@ const value1 = ref('Text');
               @change="item.translation=$event"
             />
           </td>
-          <td>{{ item.actions }}</td>
         </tr>
       </tbody>
     </table>
