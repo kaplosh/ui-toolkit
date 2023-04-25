@@ -40,6 +40,7 @@ export default defineComponent({
 
     },
     onEdit(){
+      this.currentEdit = this.currentkey;
       this.isDisabled = false;
       this.$emit ('edit', this.currentEdit );
     },
