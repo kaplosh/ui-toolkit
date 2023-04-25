@@ -6,13 +6,10 @@ const items = ref([
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
-const currentEdit = ref('Text');
-
-//function isEdited ()
+const currentEdit = ref('');
+//const disabled = ref(false);
 
 </script>
-
-
 
 <template>
   <div class="container">
@@ -22,7 +19,7 @@ const currentEdit = ref('Text');
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>KeY</th>
+          <th>Key</th>
           <th>Translation</th>
         </tr>
       </thead>
@@ -32,6 +29,7 @@ const currentEdit = ref('Text');
           :key="item.key"
         >
           <td class="font-monospace text-truncate">
+            <button class="bi bi-clipboard"></button>
             {{ item.key }}
           </td>
           <td>
