@@ -7,7 +7,13 @@ const items = ref([
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
 const currentEdit = ref('');
+const copiedText = ref('');
 //const disabled = ref(false);
+
+function copyText (key) {
+  copiedText.value = key;
+  navigator.clipboard.writeText(copiedText.value);
+}
 
 </script>
 
@@ -29,7 +35,7 @@ const currentEdit = ref('');
           :key="item.key"
         >
           <td class="font-monospace text-truncate">
-            <button class="bi bi-clipboard"></button>
+            <button class="bi bi-clipboard" @click="copyText(item.key)"></button>
             {{ item.key }}
           </td>
           <td>
