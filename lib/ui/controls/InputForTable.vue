@@ -7,6 +7,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: { type: String, required: true },
+    currentkey: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     placeholder: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: true },
@@ -19,6 +20,7 @@ export default defineComponent({
       isDisabled: this.disabled,
       showInputField: false,
       showInternalValue: true,
+      currentEdit: this.currentkey,
 
     };
   },
@@ -33,9 +35,13 @@ export default defineComponent({
         this.$emit('change', this.internalValue);
       }
       this.isDisabled = true;
+      this.currentEdit = '';
+      this.$emit('done', this.currentEdit);
+
     },
     onEdit(){
       this.isDisabled = false;
+      this.$emit ('edit', this.currentEdit );
     },
   },
 });

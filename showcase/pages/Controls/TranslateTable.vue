@@ -6,7 +6,8 @@ const items = ref([
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
-const value1 = ref('Text');
+const currentEdit = ref('Text');
+
 
 </script>
 
@@ -16,6 +17,7 @@ const value1 = ref('Text');
   <div class="container">
     <a href="#/">go home</a>
     <h1>Translation table</h1>
+    <h2>{{ currentEdit }}</h2>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -28,11 +30,16 @@ const value1 = ref('Text');
           v-for="item in items"
           :key="item.key"
         >
-          <td>{{ item.key }}</td>
+          <td class="font-monospace text-truncate">
+            {{ item.key }}
+          </td>
           <td>
             <ui.controls.InputForTable
+              :currentkey="item.key"
               :value="item.translation"
               @change="item.translation=$event"
+              @edit="currentEdit=$event"
+              @done="currentEdit=$event"
             />
           </td>
         </tr>
