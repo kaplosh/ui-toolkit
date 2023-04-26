@@ -22,19 +22,20 @@ export default defineComponent({
       showInputField: false,
       showInternalValue: true,
       currentEdit: this.currentkey,
+      currentEditable: this.editableKey,
 
     };
-  },
-
-  computed: {
-    isEditable() {
-      return this.editableKey === this.currentkey;
-    },
   },
 
   watch: {
     value(newValue) {
       this.internalValue = newValue;
+    },
+    editableKey(newValue){
+      this.currentEditable = newValue;
+      if(this.currentEdit!==this.currentEditable){
+        this.isDisabled = true;
+      }
     },
   },
   methods: {
@@ -45,13 +46,16 @@ export default defineComponent({
       this.isDisabled = true;
       this.currentEdit = '';
       this.$emit('done', this.currentEdit);
+      this.currentEdit = this.currentkey;
 
     },
     onEdit(){
-      this.currentEdit = this.currentkey;
+      //this.currentEdit = this.currentkey;
       this.$emit ('edit', this.currentEdit );
-      if (this.isEditable){
+      if (this.currentEditable === this.currentkey){
         this.isDisabled = false;
+      } else {
+        this.isDisabled = true;
       }
     },
   },
