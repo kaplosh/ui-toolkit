@@ -6,9 +6,9 @@ const items = ref([
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
-const currentEdit = ref('');
+const currentEdit = ref('nothing');
 const copiedText = ref('');
-//const disabled = ref(false);
+const disabledEdit = ref(false);
 
 function copyText (key) {
   copiedText.value = key;
@@ -35,13 +35,17 @@ function copyText (key) {
           :key="item.key"
         >
           <td class="font-monospace text-truncate">
-            <button class="bi bi-clipboard" @click="copyText(item.key)"></button>
+            <button
+              class="bi bi-clipboard"
+              @click="copyText(item.key)"
+            />
             {{ item.key }}
           </td>
           <td>
             <ui.controls.InputForTable
               :currentkey="item.key"
               :value="item.translation"
+              :editable-key="currentEdit === item.key ? item.key : null"
               @change="item.translation=$event"
               @edit="currentEdit=$event"
               @done="currentEdit=$event"

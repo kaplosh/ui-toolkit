@@ -7,6 +7,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: { type: String, required: true },
+    editableKey: { type: String, default: null },
     currentkey: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     placeholder: { type: String as PropType<string>, default: undefined },
@@ -24,6 +25,13 @@ export default defineComponent({
 
     };
   },
+
+  computed: {
+    isEditable() {
+      return this.editableKey === this.currentkey;
+    },
+  },
+
   watch: {
     value(newValue) {
       this.internalValue = newValue;
@@ -41,8 +49,10 @@ export default defineComponent({
     },
     onEdit(){
       this.currentEdit = this.currentkey;
-      this.isDisabled = false;
       this.$emit ('edit', this.currentEdit );
+      if (this.isEditable){
+        this.isDisabled = false;
+      }
     },
   },
 });
