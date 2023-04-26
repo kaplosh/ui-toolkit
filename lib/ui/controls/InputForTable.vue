@@ -19,7 +19,6 @@ export default defineComponent({
       internalValue: this.value,
       inputValue: this.internalValue,
       isDisabled: this.disabled,
-      showInputField: false,
       showInternalValue: true,
       currentEdit: this.currentkey,
       currentEditable: this.editableKey,
@@ -35,6 +34,9 @@ export default defineComponent({
       this.currentEditable = newValue;
       if(this.currentEdit!==this.currentEditable){
         this.isDisabled = true;
+        if(this.internalValue!==this.value){
+          this.internalValue = this.value;
+        }
       } else {
         this.isDisabled = false;
       }
@@ -42,9 +44,7 @@ export default defineComponent({
   },
   methods: {
     onSave() {
-      if(this.inputValue !== this.internalValue) {
-        this.$emit('change', this.internalValue);
-      }
+
       this.isDisabled = true;
       this.currentEdit = 'nothing';
       this.$emit('done', this.currentEdit);
