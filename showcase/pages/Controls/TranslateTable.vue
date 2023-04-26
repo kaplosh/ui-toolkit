@@ -8,7 +8,7 @@ const items = ref([
 ]);
 const currentEdit = ref('nothing');
 const copiedText = ref('');
-const disabledEdit = ref(false);
+
 
 function copyText (key) {
   copiedText.value = key;
@@ -45,7 +45,7 @@ function copyText (key) {
             <ui.controls.InputForTable
               :currentkey="item.key"
               :value="item.translation"
-              :editable-key="currentEdit === item.key ? item.key : null"
+              :editable-key="currentEdit"
               @change="item.translation=$event"
               @edit="currentEdit=$event"
               @done="currentEdit=$event"

@@ -35,6 +35,8 @@ export default defineComponent({
       this.currentEditable = newValue;
       if(this.currentEdit!==this.currentEditable){
         this.isDisabled = true;
+      } else {
+        this.isDisabled = false;
       }
     },
   },
@@ -44,19 +46,13 @@ export default defineComponent({
         this.$emit('change', this.internalValue);
       }
       this.isDisabled = true;
-      this.currentEdit = '';
+      this.currentEdit = 'nothing';
       this.$emit('done', this.currentEdit);
       this.currentEdit = this.currentkey;
 
     },
     onEdit(){
-      //this.currentEdit = this.currentkey;
       this.$emit ('edit', this.currentEdit );
-      if (this.currentEditable === this.currentkey){
-        this.isDisabled = false;
-      } else {
-        this.isDisabled = true;
-      }
     },
   },
 });
