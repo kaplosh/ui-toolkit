@@ -1,18 +1,28 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref } from 'vue';
-const items = ref([
+let items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
 ]);
 const currentEdit = ref('nothing');
 const copiedText = ref('');
+const query = ref('');
 
 
 function copyText (key) {
   copiedText.value = key;
   navigator.clipboard.writeText(copiedText.value);
+}
+//návratnost dat funkce onSearch
+function onSearch (param) {
+  const ogItems = this.items;
+  if(param){
+  this.items = items.value.filter(item => item.key.includes(param));
+  }
+  else {
+  this.items = ogItems;}
 }
 
 </script>
@@ -21,7 +31,14 @@ function copyText (key) {
   <div class="container">
     <a href="#/">go home</a>
     <h1>Translation table</h1>
-    <h2>{{ currentEdit }}</h2>
+    <div>
+      Searching:
+      <input
+        v-model="query"
+        type="text"
+        @input="onSearch(query)"
+      >
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
