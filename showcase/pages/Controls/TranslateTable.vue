@@ -1,7 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import { ref } from 'vue';
-let items = ref([
+import { computed, ref } from 'vue';
+const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
@@ -9,20 +9,23 @@ let items = ref([
 const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
-let ogItems = ref([]);
+let list = ref([]);
 
 
 function copyText (key) {
   copiedText.value = key;
   navigator.clipboard.writeText(copiedText.value);
 }
-//návratnost dat funkce onSearch
-function onSearch (param) {
-  let list = this.items.slice(0);
 
-  this.list = list.filter(item => item.key.includes(param));
-  console.log(this.list);
-}
+function onSearch (param:string) {
+  if(list.value.length === 0 ) {
+    this.list = this.items.slice(0);
+  }
+  this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+  if (param === '') {
+    this.items = this.list;
+  }
+  }
 </script>
 
 <template>
