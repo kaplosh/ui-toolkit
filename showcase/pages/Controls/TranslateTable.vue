@@ -5,6 +5,7 @@ const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
+  { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
 const currentEdit = ref('nothing');
 const copiedText = ref('');
@@ -22,8 +23,10 @@ function onSearch (param:string) {
     this.list = this.items.slice(0);
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+
   if (param === '') {
     this.items = this.list;
+    this.list = [];
   }
   }
 </script>
@@ -37,7 +40,7 @@ function onSearch (param:string) {
       <input
         v-model="query"
         type="text"
-        @input="onSearch(query)"
+        @keyup="onSearch(query)"
       >
     </div>
     <table class="table table-striped">
