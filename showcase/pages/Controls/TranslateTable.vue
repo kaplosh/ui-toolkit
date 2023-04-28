@@ -9,6 +9,7 @@ let items = ref([
 const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
+let ogItems = ref([]);
 
 
 function copyText (key) {
@@ -17,14 +18,11 @@ function copyText (key) {
 }
 //návratnost dat funkce onSearch
 function onSearch (param) {
-  const ogItems = this.items;
-  if(param){
-  this.items = items.value.filter(item => item.key.includes(param));
-  }
-  else {
-  this.items = ogItems;}
-}
+  let list = this.items.slice(0);
 
+  this.list = list.filter(item => item.key.includes(param));
+  console.log(this.list);
+}
 </script>
 
 <template>
