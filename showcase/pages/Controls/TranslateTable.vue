@@ -23,16 +23,13 @@ function onSearch (param:string) {
   if(list.value.length === 0 ) {
     this.list = this.items.slice(0);
   }
+
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
   if(param.length-1){
     this.items = this.list;
     this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
   }
 
-  if (param === '') {
-    this.items = this.list;
-    this.list = [];
-  }
   }
 </script>
 
