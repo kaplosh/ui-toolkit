@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
+  { key: 'db.record.person.language', translation: 'language', actions: '...' },
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
   { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
@@ -23,6 +24,10 @@ function onSearch (param:string) {
     this.list = this.items.slice(0);
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+  if(param.length-1){
+    this.items = this.list;
+    this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+  }
 
   if (param === '') {
     this.items = this.list;
