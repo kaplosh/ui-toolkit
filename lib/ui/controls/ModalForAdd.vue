@@ -24,6 +24,9 @@ export default defineComponent({
   },
   methods: {
     onSubmit(){
+      if(!this.newKey){
+        return;
+      }
       const newObj = {
         key: this.newKey,
         translation: this.newTranslation,

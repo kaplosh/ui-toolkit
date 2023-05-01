@@ -8,11 +8,11 @@ const items = ref([
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
   { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
+const list = ref([]);
 const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
 const newObj = ref({});
-let list = ref([]);
 
 watch(newObj, (value)=>{
   items.value.push(value);
