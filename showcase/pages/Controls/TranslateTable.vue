@@ -16,8 +16,8 @@ const newObj = ref({});
 
 watch(newObj, (value)=>{
   items.value.push(value);
+  list.value = items.value;
 });
-
 
 function copyText (key) {
   copiedText.value = key;
