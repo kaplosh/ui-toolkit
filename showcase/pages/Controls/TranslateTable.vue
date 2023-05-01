@@ -1,6 +1,6 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -11,7 +11,12 @@ const items = ref([
 const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
+const newObj = ref({});
 let list = ref([]);
+
+watch(newObj, (value)=>{
+  items.value.push(value);
+});
 
 
 function copyText (key) {
@@ -41,7 +46,7 @@ function onSearch (param: string) {
         type="text"
         @keyup="onSearch(query)"
       >
-      <ui.controls.ModalForTable/>
+      <ui.controls.ModalForAdd @new="newObj=$event" />
     </div>
     <table class="table table-striped">
       <thead>
