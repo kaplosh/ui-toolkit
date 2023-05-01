@@ -41,6 +41,7 @@ function onSearch (param: string) {
         type="text"
         @keyup="onSearch(query)"
       >
+      <ui.controls.ModalForTable/>
     </div>
     <table class="table table-striped">
       <thead>

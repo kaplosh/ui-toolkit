@@ -5,4 +5,4 @@ export { default as CheckBoxField } from './CheckboxField.vue';
 export { default as MultilineTextInput } from './MultilineTextInput.vue';
 export { default as RadioInput } from './RadioInput.vue';
 export { default as InputForTable } from './InputForTable.vue';
-
+export { defualt as ModalForTable } from './ModalForTable.vue';

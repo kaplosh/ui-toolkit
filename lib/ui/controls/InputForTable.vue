@@ -44,13 +44,11 @@ export default defineComponent({
   },
   methods: {
     onSave() {
-
       this.isDisabled = true;
       this.currentEdit = 'nothing';
       this.$emit('done', this.currentEdit);
       this.$emit('change', this.internalValue);
       this.currentEdit = this.currentkey;
-
     },
     onEdit(){
       this.$emit ('edit', this.currentEdit );
