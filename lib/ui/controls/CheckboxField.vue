@@ -1,9 +1,10 @@
 <script lang="ts">
-import { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
-export default {
+export default defineComponent({
+  inheritAttrs: false,
   props: {
-    values: { type: Array as PropType<string>, required: true },
+    value: { type: Array as PropType<string>, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: false },
     counter: { type: Boolean as PropType<boolean>, default: false },
@@ -11,68 +12,30 @@ export default {
   },
   data () {
     return {
-      internalValues: [],
+      internalValue: '',
     };
   },
   watch: {
     value(newValue) {
-      this.internalValues = newValue;
+      this.internalValue = newValue;
     },
   },
   methods: {
     onBlur() {
-      this.$emit('change', this.internalValues);
+      this.$emit('change', this.internalValue);
     },
   },
-};
+});
 </script>
 
 <template>
   <div>
     <input
       id="option one"
-      v-model="internalValues"
+      v-model="internalValue"
       type="checkbox"
-      value="one"
+      :value="internalValue"
       :disabled="disabled"
     >
-    <label for="jack">One</label>
-
-    <input
-      id="option two"
-      v-model="internalValues"
-      type="checkbox"
-      value="two"
-      :disabled="disabled"
-    >
-    <label for="john">Two</label>
-
-    <input
-      id="option three"
-      v-model="internalValues"
-      type="checkbox"
-      value="three"
-      :disabled="disabled"
-    >
-    <label for="mike">Three</label>
-
-    <input
-      id="option four"
-      v-model="internalValues"
-      type="checkbox"
-      value="four"
-      :disabled="disabled"
-    >
-    <label for="mike">Four</label>
-
-    <input
-      id="option five"
-      v-model="internalValues"
-      type="checkbox"
-      value="five"
-      :disabled="disabled"
-    >
-    <label for="mike">Five</label>
   </div>
-  <div>{{ internalValues }}</div>
 </template>

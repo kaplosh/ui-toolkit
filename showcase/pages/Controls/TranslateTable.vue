@@ -1,6 +1,6 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -13,6 +13,7 @@ const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
 const newObj = ref({});
+const keysForDelete = ref([]);
 
 watch(newObj, (value)=>{
   items.value.push(value);
@@ -33,6 +34,10 @@ function onSearch (param: string) {
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
 }
+function onDelete(){
+  items.value = items.value.filter(item => {})
+
+}
 </script>
 
 <template>
@@ -46,7 +51,16 @@ function onSearch (param: string) {
         type="text"
         @keyup="onSearch(query)"
       >
-      <ui.controls.ModalForAdd @new="newObj=$event" />
+      <ui.controls.ModalForAdd
+        value=""
+        @new="newObj=$event"
+      />
+      <button
+        class="btn btn-outline-danger"
+        @click="onDelete"
+      >
+        Delete
+      </button>
     </div>
     <table class="table table-striped">
       <thead>
@@ -61,6 +75,11 @@ function onSearch (param: string) {
           :key="item.key"
         >
           <td class="font-monospace text-truncate">
+            <input
+              v-model="keysForDelete"
+              type="checkbox"
+              :value="item"
+            >
             <button
               class="bi bi-clipboard"
               @click="copyText(item.key)"
