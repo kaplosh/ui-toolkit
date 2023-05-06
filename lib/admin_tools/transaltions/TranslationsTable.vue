@@ -9,7 +9,7 @@ const items = ref([
   { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
 const list = ref([]);
-const currentEdit = ref<string|null>('nothing');
+const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
 const newObj = ref({});
@@ -35,7 +35,7 @@ function onSearch (param: string) {
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
 }
 function onDelete(){
-  items.value = items.value.filter(item => {});
+  items.value = items.value.filter(item => {})
 
 }
 </script>
@@ -93,7 +93,7 @@ function onDelete(){
               :editable-key="currentEdit"
               @change="item.translation=$event"
               @edit="currentEdit=$event"
-              @done="currentEdit=null"
+              @done="currentEdit=$event"
             />
           </td>
         </tr>

@@ -18,10 +18,12 @@ export default defineComponent({
     return {
       internalValue: this.value,
       inputValue: this.internalValue,
-      isDisabled: this.disabled,
       showInternalValue: true,
+
+      isDisabled: this.disabled,
       currentEdit: this.currentkey,
       currentEditable: this.editableKey,
+      //isDisabled, currentEdit, currentEditable smrsknout do jedne variable
 
     };
   },
@@ -46,7 +48,7 @@ export default defineComponent({
     onSave() {
       this.isDisabled = true;
       this.currentEdit = 'nothing';
-      this.$emit('done', this.currentEdit);
+      this.$emit('done');
       this.$emit('change', this.internalValue);
       this.currentEdit = this.currentkey;
     },
