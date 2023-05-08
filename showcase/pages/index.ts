@@ -18,7 +18,7 @@ export const pages = {
   Controls_TextInput: page('/controls/text-inputs', Controls_TextInputsPage),
   Controls_NumberInput: page('/controls/integer-inputs', Controls_NumberInputsPage),
   Controls_CheckBoxField: page('/controls/check-box-inputs', Controls_CheckBoxPage),
-  Controls_MultilineInputPage: page('controls/multiline-inputs', Controls_MultilineInputPage),
+  Controls_MultilineInputPage: page('controls/multiline-inputs', Controls_MultilineInputPage), // TODO bad path
   Controls_RadioInputPage: page('controls/radio-inputs', Controls_RadioInput),
   Controls_TranslateTable: page('controls/translate-table', Controls_TranslateTable),
 };
