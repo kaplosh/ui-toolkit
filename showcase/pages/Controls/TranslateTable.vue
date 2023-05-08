@@ -24,7 +24,7 @@ function onSearch (param: string) {
     this.list = this.items.slice(0);
   }
   if (param.length - 1) {
-    this.items = this.list;
+    items.value = list.value;
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
 }

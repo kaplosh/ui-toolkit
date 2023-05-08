@@ -42,7 +42,7 @@ export default defineComponent({
 
 <template>
   <div
-    class="card"
+    class="card mb-3"
     style="width: 18rem;"
   >
     <div class="ms-1">

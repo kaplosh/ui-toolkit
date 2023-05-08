@@ -10,7 +10,7 @@ export default defineComponent({
     currentkey: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: true },
-    item: { type: Array as any },
+    item: { type: Object as any },
 
   },
   data () {
