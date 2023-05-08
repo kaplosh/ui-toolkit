@@ -41,17 +41,19 @@ export default defineComponent({
 </script>
 
 <template>
-  <input
-    v-model="newKey"
-    type="text"
-    placeholder="new key"
-  >
-  <input
-    v-model="newTranslation"
-    type="text"
-    placeholder="new translation"
-  >
-  <button @click="onSubmit">
-    Submit
-  </button>
+  <div>
+    <input
+      v-model="newKey"
+      type="text"
+      placeholder="new key"
+    >
+    <input
+      v-model="newTranslation"
+      type="text"
+      placeholder="new translation"
+    >
+    <button @click="onSubmit">
+      Submit
+    </button>
+  </div>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref, watch } from 'vue';
+import TableRow from '../../../lib/admin_tools/transaltions/TableRow.vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -34,17 +35,13 @@ function onSearch (param: string) {
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
 }
-function onDelete(){
-  items.value = items.value.filter(item => {});
-
-}
 </script>
 
 <template>
   <div class="container">
     <a href="#/">go home</a>
     <h1>Translation table</h1>
-    <div>
+    <div class="d-flex">
       Searching:
       <input
         v-model="query"
@@ -55,12 +52,7 @@ function onDelete(){
         value=""
         @new="newObj=$event"
       />
-      <button
-        class="btn btn-outline-danger"
-        @click="onDelete"
-      >
-        Delete
-      </button>
+
     </div>
     <table class="table table-striped">
       <thead>
@@ -74,28 +66,15 @@ function onDelete(){
           v-for="item in items"
           :key="item.key"
         >
-          <td class="font-monospace text-truncate">
-            <input
-              v-model="keysForDelete"
-              type="checkbox"
-              :value="item"
-            >
-            <button
-              class="bi bi-clipboard"
-              @click="copyText(item.key)"
-            />
-            {{ item.key }}
-          </td>
-          <td>
-            <ui.controls.InputForTable
-              :currentkey="item.key"
-              :value="item.translation"
-              :editable-key="currentEdit"
-              @change="item.translation=$event"
-              @edit="currentEdit=$event"
-              @done="currentEdit=null"
-            />
-          </td>
+          <table-row
+            :currentkey="item.key"
+            :value="item.translation"
+            :item="item"
+            :editable-key="currentEdit"
+            @change="item.translation=$event"
+            @edit="currentEdit=$event"
+            @done="currentEdit=null"
+          />
         </tr>
       </tbody>
     </table>

@@ -1,8 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import { ref } from 'vue';
-
 export default defineComponent({
   inheritAttrs: false,
   props: {
@@ -10,8 +8,8 @@ export default defineComponent({
     editableKey: { type: String, default: null },
     currentkey: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
-    placeholder: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: true },
+    item: { type: Array as any },
 
   },
   data () {
@@ -19,6 +17,7 @@ export default defineComponent({
       internalValue: this.value,
       inputValue: this.internalValue,
       showInternalValue: true,
+      copiedText: '',
 
       isDisabled: this.disabled,
       currentEdit: this.currentkey,
@@ -55,32 +54,45 @@ export default defineComponent({
     onEdit(){
       this.$emit ('edit', this.currentEdit );
     },
+    copyText (key) {
+  this.copiedText= key;
+  navigator.clipboard.writeText(this.copiedText);
+},
   },
 });
 </script>
 
 <template>
-  <div class="input-group mb-3">
-    <input
-      v-model="internalValue"
-      :disabled="isDisabled"
-      type="text"
-      class="form-control"
-      placeholder="Translation"
-    >
+  <td class="font-monospace text-truncate">
     <button
-      id="basic-addon1"
-      class="input-group-text"
-      @click="onEdit"
-    >
-      Edit
-    </button>
-    <button
-      id="basic-addon1"
-      class="input-group-text"
-      @click="onSave"
-    >
-      Save
-    </button>
-  </div>
+      class="btn btn-outline-dark bi bi-clipboard"
+      @click="copyText(item.key)"
+    />
+    {{ item.key }}
+  </td>
+  <td>
+    <div class="input-group mb-3">
+      <input
+        v-model="internalValue"
+        :disabled="isDisabled"
+        type="text"
+        class="form-control"
+        placeholder="Translation"
+      >
+      <button
+        id="basic-addon1"
+        class="input-group-text"
+        @click="onEdit"
+      >
+        Edit
+      </button>
+      <button
+        id="basic-addon1"
+        class="input-group-text"
+        @click="onSave"
+      >
+        Save
+      </button>
+    </div>
+  </td>
 </template>
