@@ -41,19 +41,32 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <input
-      v-model="newKey"
-      type="text"
-      placeholder="new key"
-    >
-    <input
-      v-model="newTranslation"
-      type="text"
-      placeholder="new translation"
-    >
-    <button @click="onSubmit">
-      Submit
-    </button>
+  <div
+    class="card"
+    style="width: 18rem;"
+  >
+    <div class="ms-1">
+      Add new key
+    </div>
+    <div class="card-body">
+      <input
+        v-model="newKey"
+        type="text"
+        placeholder="New key"
+        class="mb-1"
+      >
+      <input
+        v-model="newTranslation"
+        type="text"
+        placeholder="New translation"
+        class="mb-1"
+      >
+      <button
+        class="btn btn-outline-success mb-1 text-end"
+        @click="onSubmit"
+      >
+        Submit
+      </button>
+    </div>
   </div>
 </template>

@@ -11,20 +11,13 @@ const items = ref([
 ]);
 const list = ref([]);
 const currentEdit = ref<string|null>('nothing');
-const copiedText = ref('');
 const query = ref('');
 const newObj = ref({});
-const keysForDelete = ref([]);
 
 watch(newObj, (value)=>{
   items.value.push(value);
   list.value = items.value;
 });
-
-function copyText (key) {
-  copiedText.value = key;
-  navigator.clipboard.writeText(copiedText.value);
-}
 
 function onSearch (param: string) {
   if (list.value.length === 0) {
@@ -41,18 +34,19 @@ function onSearch (param: string) {
   <div class="container">
     <a href="#/">go home</a>
     <h1>Translation table</h1>
-    <div class="d-flex">
+    <div>
+      <ui.controls.ModalForAdd
+        value=""
+        @new="newObj=$event"
+      />
+    </div>
+    <div>
       Searching:
       <input
         v-model="query"
         type="text"
         @keyup="onSearch(query)"
       >
-      <ui.controls.ModalForAdd
-        value=""
-        @new="newObj=$event"
-      />
-
     </div>
     <table class="table table-striped">
       <thead>
