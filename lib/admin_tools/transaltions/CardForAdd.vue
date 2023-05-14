@@ -4,7 +4,7 @@ import { defineComponent, PropType } from 'vue';
 export default defineComponent({
   inheritAttrs: false,
   props: {
-    value: { type: String, required: true },
+    value: { type: String },
     domId: { type: String as PropType<string>, default: undefined },
     placeholder: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: false },

@@ -41,7 +41,7 @@ export default defineComponent({
       if(this.isDisabled) {
         this.title = 'Save';
         this.$emit('edit', this.currentkey);
-      } else {
+      } else if (!this.isDisabled) {
         this.title = 'Edit';
         this.$emit('done');
         this.$emit('change', this.internalValue);

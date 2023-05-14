@@ -5,7 +5,7 @@ import Controls_NumberInputsPage from './Controls/IntegerInputsPage.vue';
 import Controls_CheckBoxPage from './Controls/CheckBoxPage.vue';
 import Controls_MultilineInputPage from './Controls/MultilineInputPage.vue';
 import Controls_RadioInput from './Controls/RadioInputPage.vue';
-import Controls_TranslateTable from './Controls/TranslateTable.vue';
+import Controls_TranslateTable from './Controls/TranslateTablePage.vue';
 import HomePage from './HomePage.vue';
 
 interface Page {

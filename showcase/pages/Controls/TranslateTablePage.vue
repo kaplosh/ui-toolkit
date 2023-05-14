@@ -1,7 +1,10 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref, watch } from 'vue';
+import CardForAdd from '../../../lib/admin_tools/transaltions/CardForAdd.vue';
 import TableRow from '../../../lib/admin_tools/transaltions/TableRow.vue';
+import TableComponent from '../../../lib/admin_tools/transaltions/TableComponent.vue';
+import SearchingComponent from '../../../lib/admin_tools/transaltions/SearchingComponent.vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -35,10 +38,7 @@ function onSearch (param: string) {
     <a href="#/">go home</a>
     <h1>Translation table</h1>
     <div>
-      <ui.controls.ModalForAdd
-        value=""
-        @new="newObj=$event"
-      />
+      <card-for-add />
     </div>
     <div>
       Searching:
@@ -48,6 +48,7 @@ function onSearch (param: string) {
         @keyup="onSearch(query)"
       >
     </div>
+    <div />
     <table class="table table-striped">
       <thead>
         <tr>
@@ -72,6 +73,10 @@ function onSearch (param: string) {
         </tr>
       </tbody>
     </table>
+    //TODO
+    <card-for-add />
+    <searching-component />
+    <table-component />
   </div>
 </template>
 

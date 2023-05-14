@@ -1,6 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref, watch } from 'vue';
+import SearchingComponent from './SearchingComponent.vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -34,10 +35,6 @@ function onSearch (param: string) {
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
 }
-function onDelete(){
-  items.value = items.value.filter(item => {})
-
-}
 </script>
 
 <template>
@@ -55,12 +52,6 @@ function onDelete(){
         value=""
         @new="newObj=$event"
       />
-      <button
-        class="btn btn-outline-danger"
-        @click="onDelete"
-      >
-        Delete
-      </button>
     </div>
     <table class="table table-striped">
       <thead>
