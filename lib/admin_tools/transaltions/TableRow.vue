@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-
 export default defineComponent({
   inheritAttrs: false,
   props: {
@@ -9,56 +8,49 @@ export default defineComponent({
     editableKey: { type: String, default: null },
     currentkey: { type: String, required: true },
     domId: { type: String as PropType<string>, default: undefined },
-    disabled: { type: Boolean as PropType<boolean>, default: true },
-    item: { type: Object as any },
-
+    item: { type: Object as PropType<any>, required: true },
   },
-  data () {
+  data() {
     return {
       internalValue: this.value,
-      inputValue: this.internalValue,
-      showInternalValue: true,
       copiedText: '',
-
-      isDisabled: this.disabled,
-      currentEdit: this.currentkey,
-      currentEditable: this.editableKey,
-      //isDisabled, currentEdit, currentEditable smrsknout do jedne variable
-
+      title: 'Edit',
     };
   },
-
+  computed: {
+    isDisabled(): boolean {
+      return this.currentkey !== this.editableKey;
+    },
+  },
   watch: {
     value(newValue) {
       this.internalValue = newValue;
     },
-    editableKey(newValue){
-      this.currentEditable = newValue;
-      if(this.currentEdit!==this.currentEditable){
-        this.isDisabled = true;
-        if(this.internalValue!==this.value){
-          this.internalValue = this.value;
-        }
-      } else {
-        this.isDisabled = false;
+    editableKey(newValue) {
+      if (this.currentkey !== newValue) {
+        this.internalValue = this.value;
       }
     },
   },
   methods: {
-    onSave() {
-      this.isDisabled = true;
-      this.currentEdit = 'nothing';
+    /*onSave() {
       this.$emit('done');
       this.$emit('change', this.internalValue);
-      this.currentEdit = this.currentkey;
+    },*/
+    onEdit() {
+      if(this.isDisabled) {
+        this.title = 'Save';
+        this.$emit('edit', this.currentkey);
+      } else {
+        this.title = 'Edit';
+        this.$emit('done');
+        this.$emit('change', this.internalValue);
+      }
     },
-    onEdit(){
-      this.$emit ('edit', this.currentEdit );
+    copyText(key) {
+      this.copiedText = key;
+      navigator.clipboard.writeText(this.copiedText);
     },
-    copyText (key) {
-  this.copiedText= key;
-  navigator.clipboard.writeText(this.copiedText);
-},
   },
 });
 </script>
@@ -85,14 +77,7 @@ export default defineComponent({
         class="input-group-text"
         @click="onEdit"
       >
-        Edit
-      </button>
-      <button
-        id="basic-addon1"
-        class="input-group-text"
-        @click="onSave"
-      >
-        Save
+        {{ title }}
       </button>
     </div>
   </td>
