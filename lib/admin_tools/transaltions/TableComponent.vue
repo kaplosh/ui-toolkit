@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineProps, watch } from 'vue';
+import { ref, defineProps, watch, onMounted } from 'vue';
 import TableRow from './TableRow.vue';
 import { TranslationRow } from './types';
 
@@ -27,23 +27,15 @@ watch(() => props.newObj, (value) => {
   if (value) {
     items.value.push(value);
     list.value = items.value;
+    this.$emit('refresh', this.items);
   }
 });
 
-function copyText(key: string) {
-  copiedText.value = key;
-  navigator.clipboard.writeText(copiedText.value);
-}
+onMounted(() => {if(items.value){
+  this.$emit('refresh', this.items);
 
-function onSearch(param: string) {
-  if (list.value.length === 0) {
-    list.value = items.value.slice(0);
-  }
-  if (param.length > 1) {
-    items.value = list.value;
-  }
-  items.value = items.value.filter((item) => item.key.toLowerCase().includes(param));
 }
+});
 </script>
 
 <template>
