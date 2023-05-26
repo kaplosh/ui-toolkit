@@ -1,39 +1,48 @@
-<script lang="ts" setup="">
-import { ui } from '@ema/ui-toolkit';
-import { ref, watch } from 'vue';
+<script lang="ts" setup>
+import { ref, defineProps, watch } from 'vue';
 import TableRow from './TableRow.vue';
-const items = ref([
-{ key: 'db.record.person.name', translation: 'name', actions: '...' },
-{ key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
-{ key: 'db.record.person.language', translation: 'language', actions: '...' },
-{ key: 'db.record.person.age', translation: 'age', actions: '...' },
-{ key: 'db.record.city', translation: 'city', actions: '...' },
+import { TranslationRow } from './types';
+
+const items = ref<TranslationRow[]>([
+  { key: 'db.record.person.name', translation: 'name', actions: '...' },
+  { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
+  { key: 'db.record.person.language', translation: 'language', actions: '...' },
+  { key: 'db.record.person.age', translation: 'age', actions: '...' },
+  { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
-const list = ref([]);
+
+const list = ref<TranslationRow[]>([]);
 const currentEdit = ref('nothing');
 const copiedText = ref('');
 const query = ref('');
-const newObj = ref({});
-const keysForDelete = ref([]);
 
-watch(newObj, (value)=>{
-items.value.push(value);
-list.value = items.value;
+const props = defineProps({
+  newObj: {
+    type: Object as () => TranslationRow,
+    required: true,
+  },
 });
 
-function copyText (key) {
-copiedText.value = key;
-navigator.clipboard.writeText(copiedText.value);
+watch(() => props.newObj, (value) => {
+  if (value) {
+    items.value.push(value);
+    list.value = items.value;
+  }
+});
+
+function copyText(key: string) {
+  copiedText.value = key;
+  navigator.clipboard.writeText(copiedText.value);
 }
 
-function onSearch (param: string) {
-if (list.value.length === 0) {
-this.list = this.items.slice(0);
-}
-if (param.length - 1) {
-this.items = this.list;
-}
-this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+function onSearch(param: string) {
+  if (list.value.length === 0) {
+    list.value = items.value.slice(0);
+  }
+  if (param.length > 1) {
+    items.value = list.value;
+  }
+  items.value = items.value.filter((item) => item.key.toLowerCase().includes(param));
 }
 </script>
 
@@ -55,9 +64,9 @@ this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
           :value="item.translation"
           :item="item"
           :editable-key="currentEdit"
-          @change="item.translation=$event"
-          @edit="currentEdit=$event"
-          @done="currentEdit=null"
+          @change="item.translation = $event"
+          @edit="currentEdit = $event"
+          @done="currentEdit = null"
         />
       </tr>
     </tbody>

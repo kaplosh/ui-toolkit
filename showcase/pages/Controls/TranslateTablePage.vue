@@ -5,6 +5,7 @@ import CardForAdd from '../../../lib/admin_tools/transaltions/CardForAdd.vue';
 import TableRow from '../../../lib/admin_tools/transaltions/TableRow.vue';
 import TableComponent from '../../../lib/admin_tools/transaltions/TableComponent.vue';
 import SearchingComponent from '../../../lib/admin_tools/transaltions/SearchingComponent.vue';
+import { TranslationRow } from '../../../lib/admin_tools/transaltions/types';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
@@ -15,7 +16,7 @@ const items = ref([
 const list = ref([]);
 const currentEdit = ref<string|null>('nothing');
 const query = ref('');
-const newObj = ref({});
+const newObj = ref<TranslationRow>({});
 
 watch(newObj, (value)=>{
   items.value.push(value);
@@ -30,6 +31,11 @@ function onSearch (param: string) {
     items.value = list.value;
   }
   this.items = items.value.filter(item => item.key.toLowerCase().includes(param));
+}
+
+
+function handleNewRow(data: TranslationRow) {
+  newObj.value = data;
 }
 </script>
 
@@ -74,9 +80,9 @@ function onSearch (param: string) {
       </tbody>
     </table>
     //TODO
-    <card-for-add />
+    <card-for-add @new="handleNewRow" />
     <searching-component />
-    <table-component />
+    <table-component :new-obj="newObj" />
   </div>
 </template>
 

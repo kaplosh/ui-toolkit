@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { TranslationRow } from './types';
 
 export default defineComponent({
   inheritAttrs: false,
@@ -27,7 +28,7 @@ export default defineComponent({
       if(!this.newKey){
         return;
       }
-      const newObj = {
+      const newObj:TranslationRow = {
         key: this.newKey,
         translation: this.newTranslation,
       };
