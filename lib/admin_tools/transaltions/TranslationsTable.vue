@@ -1,7 +1,5 @@
 <script lang="ts" setup="">
-import { ui } from '@ema/ui-toolkit';
 import { ref, watch } from 'vue';
-import SearchingComponent from './SearchingComponent.vue';
 const items = ref([
   { key: 'db.record.person.name', translation: 'name', actions: '...' },
   { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },

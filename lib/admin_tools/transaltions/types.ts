@@ -1,4 +1,4 @@
 export interface TranslationRow {
-  key: string,
-  translation: string;
+  key: string
+  translation: string
 }

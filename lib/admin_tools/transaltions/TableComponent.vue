@@ -10,7 +10,7 @@ const items = ref<TranslationRow[]>([
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
   { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
-const query = ref('');
+const query= ref('');
 const list = ref<TranslationRow[]>(items.value);
 const currentEdit = ref('nothing');
 const props = defineProps({
