@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineProps, watch, onMounted } from 'vue';
+import { ref, defineProps, watch } from 'vue';
 import TableRow from './TableRow.vue';
 import { TranslationRow } from './types';
 
@@ -13,29 +13,40 @@ const items = ref<TranslationRow[]>([
 
 const list = ref<TranslationRow[]>([]);
 const currentEdit = ref('nothing');
-const copiedText = ref('');
-const query = ref('');
+
 
 const props = defineProps({
   newObj: {
     type: Object as () => TranslationRow,
     required: true,
   },
+  query: { type: String, required: true },
 });
 
 watch(() => props.newObj, (value) => {
   if (value) {
     items.value.push(value);
     list.value = items.value;
-    this.$emit('refresh', this.items);
+  }
+});
+watch(() => props.query, (value) => {
+  if (value) {
+    onSearch(value);
   }
 });
 
-onMounted(() => {if(items.value){
-  this.$emit('refresh', this.items);
-
+function onSearch (param: string) {
+  if (list.value.length === 0) {
+    list.value = items.value.slice(0);
+  }
+  if (param.length - 1) {
+    items.value = list.value;
+  }
+  items.value = items.value.filter(item => item.key.toLowerCase().includes(param));
+  //this.$emit('refresh', this.items);
 }
-});
+
+
 </script>
 
 <template>

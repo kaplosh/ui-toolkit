@@ -9,12 +9,16 @@ const items = ref<TranslationRow[]>;
 const list = ref([]);
 const currentEdit = ref<string|null>('nothing');
 const newObj = ref<TranslationRow>({});
+const query = ref('');
 
 function handleRefresh(updatedItems: TranslationRow[]){
   this.items = updatedItems;
 }
 function handleNewRow(data: TranslationRow) {
   newObj.value = data;
+}
+function handleQuery(data){
+  query.value = data;
 }
 </script>
 
@@ -25,16 +29,16 @@ function handleNewRow(data: TranslationRow) {
     //TODO
     <card-for-add @new="handleNewRow" />
     <searching-component
-      :items="items"
-      :list="list"
+      @search="handleQuery"
       @refresh="handleRefresh"
     />
     <table-component
       :new-obj="newObj"
+      :query="query"
       @refresh="items = $event"
     />
   </div>
 </template>
-
+y
 
 
