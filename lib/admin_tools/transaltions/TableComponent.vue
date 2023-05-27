@@ -10,31 +10,21 @@ const items = ref<TranslationRow[]>([
   { key: 'db.record.person.age', translation: 'age', actions: '...' },
   { key: 'db.record.city', translation: 'city', actions: '...' },
 ]);
-
-const list = ref<TranslationRow[]>([]);
+const query = ref('');
+const list = ref<TranslationRow[]>(items.value);
 const currentEdit = ref('nothing');
-
-
 const props = defineProps({
   newObj: {
     type: Object as () => TranslationRow,
     required: true,
   },
-  query: { type: String, required: true },
 });
-
 watch(() => props.newObj, (value) => {
   if (value) {
     items.value.push(value);
     list.value = items.value;
   }
 });
-watch(() => props.query, (value) => {
-  if (value) {
-    onSearch(value);
-  }
-});
-
 function onSearch (param: string) {
   if (list.value.length === 0) {
     list.value = items.value.slice(0);
@@ -43,13 +33,18 @@ function onSearch (param: string) {
     items.value = list.value;
   }
   items.value = items.value.filter(item => item.key.toLowerCase().includes(param));
-  //this.$emit('refresh', this.items);
 }
-
-
 </script>
 
 <template>
+  <div>
+    Searching:
+    <input
+      v-model="query"
+      type="text"
+      @keyup="onSearch(query)"
+    >
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
