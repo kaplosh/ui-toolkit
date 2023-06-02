@@ -2,16 +2,11 @@
 import { ref, defineProps, watch } from 'vue';
 import TableRow from './TableRow.vue';
 import { TranslationRow } from './types';
+import { items } from './mockDb';
 
-const items = ref<TranslationRow[]>([
-  { key: 'db.record.person.name', translation: 'name', actions: '...' },
-  { key: 'db.record.person.lastName', translation: 'lastName', actions: '...' },
-  { key: 'db.record.person.language', translation: 'language', actions: '...' },
-  { key: 'db.record.person.age', translation: 'age', actions: '...' },
-  { key: 'db.record.city', translation: 'city', actions: '...' },
-]);
 const query= ref('');
-const list = ref<TranslationRow[]>(items.value);
+const dictionary = ref(items);
+const list = ref<TranslationRow[]>(dictionary.value);
 const currentEdit = ref('nothing');
 const props = defineProps({
   newObj: {
@@ -21,18 +16,18 @@ const props = defineProps({
 });
 watch(() => props.newObj, (value) => {
   if (value) {
-    items.value.push(value);
-    list.value = items.value;
+    dictionary.value.push(value);
+    list.value = dictionary.value;
   }
 });
 function onSearch (param: string) {
   if (list.value.length === 0) {
-    list.value = items.value.slice(0);
+    list.value = dictionary.value.slice(0);
   }
   if (param.length - 1) {
-    items.value = list.value;
+    this.dictionary = list.value;
   }
-  items.value = items.value.filter(item => item.key.toLowerCase().includes(param));
+  this.dictionary = dictionary.value.filter(item => item.key.toLowerCase().includes(param));
 }
 </script>
 
@@ -54,7 +49,7 @@ function onSearch (param: string) {
     </thead>
     <tbody>
       <tr
-        v-for="item in items"
+        v-for="item in dictionary"
         :key="item.key"
       >
         <table-row
