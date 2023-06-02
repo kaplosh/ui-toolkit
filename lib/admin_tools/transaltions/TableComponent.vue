@@ -4,7 +4,6 @@ import TableRow from './TableRow.vue';
 import { TranslationRow } from './types';
 import { items } from './mockDb';
 
-
 const query= ref('');
 const dictionary = ref(items);
 const list = ref<TranslationRow[]>(dictionary.value);

@@ -1,4 +1,3 @@
-
 import { TranslationRow } from './types';
 
 export const items: TranslationRow[] = ([
