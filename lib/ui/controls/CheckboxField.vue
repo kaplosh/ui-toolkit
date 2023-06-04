@@ -8,19 +8,14 @@ export default defineComponent({
     items: { type: Array as PropType<CheckBoxInterface[]>, required: true },
     domId: { type: String as PropType<string>, default: undefined },
     disabled: { type: Boolean as PropType<boolean>, default: false },
-
-
   },
+
   data () {
     return {
-      internalValue: 'false',
       selectedValues: [],
     };
   },
   watch: {
-    value(newValue) {
-      this.internalValue = newValue;
-      },
     selectedValues(updatedValues){
       this.$emit('change', updatedValues);
       },

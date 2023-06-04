@@ -19,7 +19,7 @@
         base:
         <ui.controls.CheckBoxField
           :items="data"
-          @change=" selectedBoxes = $event"
+          @change="selectedBoxes= $event"
         />
         {{ selectedBoxes }}
       </div>
