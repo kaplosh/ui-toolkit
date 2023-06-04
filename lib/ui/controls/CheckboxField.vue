@@ -20,14 +20,13 @@ export default defineComponent({
   watch: {
     value(newValue) {
       this.internalValue = newValue;
+      },
+    selectedValues(updatedValues){
+      this.$emit('change', updatedValues);
+      },
     },
   },
-  methods: {
-    onClick() {
-      this.$emit('change', this.selectedValues);
-    },
-  },
-});
+);
 </script>
 
 <template>

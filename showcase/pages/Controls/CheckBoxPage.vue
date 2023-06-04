@@ -1,6 +1,9 @@
-<script lang="ts" setup="">
+<script lang="ts" setup>
+  import { ref } from 'vue';
   import { ui } from '@ema/ui-toolkit';
   import { data } from '../../../lib/ui/controls/mockDb';
+
+  const selectedBoxes = ref([]);
 </script>
 
 <template>
@@ -14,7 +17,11 @@
         class="col-md-6 col-lg-4 col-xl-3"
       >
         base:
-        <ui.controls.CheckBoxField :items="data" @change="$event"/>
+        <ui.controls.CheckBoxField
+          :items="data"
+          @change=" selectedBoxes = $event"
+        />
+        {{ selectedBoxes }}
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
