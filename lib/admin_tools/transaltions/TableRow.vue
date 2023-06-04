@@ -30,14 +30,11 @@ export default defineComponent({
     editableKey(newValue) {
       if (this.currentkey !== newValue) {
         this.internalValue = this.value;
+        this.title = 'Edit';
       }
     },
   },
   methods: {
-    /*onSave() {
-      this.$emit('done');
-      this.$emit('change', this.internalValue);
-    },*/
     onEdit() {
       if(this.isDisabled) {
         this.title = 'Save';
