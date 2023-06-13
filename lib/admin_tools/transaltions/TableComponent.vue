@@ -4,16 +4,15 @@ import TableRow from './TableRow.vue';
 import { TranslationRow } from './types';
 import { items } from './mockDb';
 
+interface Props {
+  newObj: TranslationRow;
+}
+
 const query= ref('');
 const dictionary = ref(items);
 const list = ref<TranslationRow[]>(dictionary.value);
 const currentEdit = ref('nothing');
-const props = defineProps({
-  newObj: {
-    type: Object as () => TranslationRow,
-    required: true,
-  },
-});
+const props = defineProps<Props>();
 watch(() => props.newObj, (value) => {
   if (value) {
     dictionary.value.push(value);

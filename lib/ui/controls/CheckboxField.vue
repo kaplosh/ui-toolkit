@@ -36,6 +36,10 @@ export default defineComponent({
       :value="item.checkBoxValue"
       :disabled="disabled"
     >
-    <label :for="item.label">{{ item.label }}</label>
+    <label :for="item.checkBoxValue">{{ item.label }}</label>
   </div>
 </template>
+
+<style scoped>
+
+</style>
