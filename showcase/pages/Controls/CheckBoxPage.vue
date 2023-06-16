@@ -3,7 +3,6 @@
   import { ui } from '@ema/ui-toolkit';
   import { data } from '../../../lib/ui/controls/mockDb';
 
-  const selectedBoxes = ref([]);
 </script>
 
 <template>
@@ -17,16 +16,11 @@
         class="col-md-6 col-lg-4 col-xl-3"
       >
         base:
-        <ui.controls.CheckBoxField
-          :items="data"
-          @change="selectedBoxes= $event"
-        />
-        {{ selectedBoxes }}
+        <ui.controls.CheckBoxField @change="checked = $event" />
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
         disabled:
         <ui.controls.CheckBoxField
-          :items="data"
           disabled="true"
         />
       </div>
