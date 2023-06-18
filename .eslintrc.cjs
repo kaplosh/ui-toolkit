@@ -30,5 +30,6 @@ module.exports = {
     'no-use-before-define': [ 'off' ],
     'no-console': [ 'off' ],
     'no-new': [ 'off' ],
+    'vue/multi-word-component-names': [ 'off' ],
   },
 };

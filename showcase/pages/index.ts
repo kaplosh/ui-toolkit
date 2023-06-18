@@ -1,7 +1,8 @@
 import { Component } from 'vue';
 
-import Controls_TextInputsPage from './Controls/TextInputsPage.vue';
 import HomePage from './HomePage.vue';
+import ComponentsPage from './ComponentsPage/ComponentsPage.vue';
+import Controls_TextInputsPage from './Controls/TextInputsPage.vue';
 
 interface Page {
   pathname: string;
@@ -10,6 +11,7 @@ interface Page {
 
 export const pages = {
   Home: page('', HomePage),
+  Components: page('/components', ComponentsPage),
   Controls_TextInput: page('/controls/text-inputs', Controls_TextInputsPage),
 };
 
