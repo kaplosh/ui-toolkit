@@ -14,8 +14,13 @@ const items: ui.OptionItem[] = records.map(record => ({
   object: record,
 }));
 
-const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 
+const selectedItems = ref<ui.OptionItem[]>([]);
+//const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+
+function handleSelectedItems(updatedItems){
+  this.items = updatedItems;
+}
 </script>
 
 <template>
@@ -33,7 +38,7 @@ const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0)
         <ui.controls.OptionsSelect
           :items="items"
           :selected="selectedItems"
-          @change="selectedItems = $event"
+          @change="handleSelectedItems = $event"
         >
           <template #selected="{ items }">
             <span v-if="!items.length">-</span>
