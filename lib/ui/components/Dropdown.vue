@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useFloating, autoUpdate, flip, shift, size } from '@floating-ui/vue';
 
-const reference = ref(null);
+const reference = ref<null | HTMLButtonElement>(null);
 const floating = ref<null | HTMLUListElement>(null);
 const { floatingStyles } = useFloating(reference, floating, {
   placement: 'bottom-start',
@@ -28,6 +28,9 @@ const shown = ref(false);
 function onClickBody(event) {
   if (!floating.value?.contains(event.target)) {
     shown.value = false;
+  }
+  if (reference.value?.contains(event.target)) {
+    event.stopPropagation();
   }
 }
 
