@@ -1,4 +1,5 @@
 export { default as InputField } from './InputField.vue';
+export { default as OptionsSelect } from './OptionsSelect.vue';
 export { default as IntegerInput } from './IntegerInput.vue';
 export { default as NumberInput } from './NumberInput.vue';
 export { default as CheckBoxField } from './CheckboxField.vue';
