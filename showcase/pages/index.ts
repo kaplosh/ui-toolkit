@@ -3,6 +3,7 @@ import { Component } from 'vue';
 import HomePage from './HomePage.vue';
 import ComponentsPage from './ComponentsPage/ComponentsPage.vue';
 import Controls_TextInputsPage from './Controls/TextInputsPage.vue';
+import Controls_OptionsSelectsPage from './Controls/OptionsSelectsPage.vue';
 
 interface Page {
   pathname: string;
@@ -13,6 +14,7 @@ export const pages = {
   Home: page('', HomePage),
   Components: page('/components', ComponentsPage),
   Controls_TextInput: page('/controls/text-inputs', Controls_TextInputsPage),
+  Controls_OptionsSelects: page('/controls/options-selects', Controls_OptionsSelectsPage),
 };
 
 function page(pathname: string, component: Component): Page {
