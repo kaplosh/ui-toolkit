@@ -32,6 +32,7 @@ export default defineComponent({
 <template>
   <input
     :id="domId"
+    class="d-inline-block"
     v-model="internalValue"
     type="text"
     :placeholder="placeholder"
