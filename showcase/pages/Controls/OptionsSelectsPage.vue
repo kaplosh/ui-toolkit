@@ -11,7 +11,6 @@ const records = [
 
 const items: ui.OptionItem[] = records.map(record => ({
   value: record.id,
-  text: record.name,
   object: record,
 }));
 
@@ -41,8 +40,13 @@ const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0)
             <span v-if="items.length === 1">{{ items[0].object.name }}</span>
             <span v-if="items.length > 1">[ {{ items.length }} ]</span>
           </template>
-          <template #item="{ item }">
-            {{ item.object.name }}
+          <template #item="{ item, selected, onClick }">
+            <li
+              :class="['list-group-item', selected && 'active' ]"
+              @click="onClick"
+            >
+              {{ item.object.name }}
+            </li>
           </template>
         </ui.controls.OptionsSelect>
       </div>

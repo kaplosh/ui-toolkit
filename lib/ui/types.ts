@@ -1,9 +1,5 @@
-export type OptionItem = {
-  value?: string;
-  object?: any;
-  textKey: string;
-} | {
-  value?: string;
-  object?: any;
-  text: string;
+export interface OptionItem {
+  value: string;
+  object: any;
 }
+

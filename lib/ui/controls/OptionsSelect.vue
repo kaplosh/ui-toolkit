@@ -56,14 +56,14 @@ function onSelectedChanged(items: ui.OptionItem[]): void {
         class="list-group"
         :style="floatingStyles"
       >
-        <li
+        <slot
           v-for="item of items"
           :key="item.value"
-          :class="['list-group-item', isSelected(item) && 'active']"
-          @click="onClickOption(item)"
-        >
-          <slot name="item" :item="item" />
-        </li>
+          name="item"
+          :item="item"
+          :selected="isSelected(item)"
+          :on-click="() => onClickOption(item)"
+        />
       </ul>
     </div>
   </div>
