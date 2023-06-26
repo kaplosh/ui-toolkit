@@ -71,7 +71,7 @@ function onSelectedChanged(items: Ref<OptionItem[]>): void {
           name="item"
           :item="item"
           :selected="isSelected(item)"
-          :on-click="() => onClickOption(item)"
+          :mama="onClickOption(item)"
         />
       </ul>
     </div>

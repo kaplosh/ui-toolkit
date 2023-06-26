@@ -48,7 +48,6 @@ function handleSelectedItems(updatedItems){
           <template #item="{ item, selected, onClick }">
             <li
               :class="['list-group-item', selected && 'active' ]"
-              @click="onClick"
             >
               {{ item.object.name }}
             </li>
