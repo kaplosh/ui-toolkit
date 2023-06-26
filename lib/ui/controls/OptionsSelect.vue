@@ -1,7 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import useFloatingList from '../composables/useFloatingList';
-import { Ref, ref } from 'vue';
+import { computed, Ref, ref } from 'vue';
 import { OptionItem } from '../types';
 
 
@@ -14,6 +14,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits([ 'change' ]);
 const selectedItems = ref<ui.OptionItem[]>([]);
+
 
 const {
   reference,
@@ -28,8 +29,10 @@ function isSelected(item: ui.OptionItem): boolean {
 
 function onClickOption(item: ui.OptionItem): void {
   console.log('KKK');
-  if(isSelected(item)) {
-    this.selected.push(item);
+  if(!isSelected(item)) {
+    console.log(item);
+    selectedItems.value.push(item);
+    console.log('these are selected', selectedItems);
   } else {
     selectedItems.value = this.props.selected.filter(item => item != item.id );
   }
@@ -38,6 +41,7 @@ function onClickOption(item: ui.OptionItem): void {
 
 function onSelectedChanged(items: Ref<OptionItem[]>): void {
   emit('change', items);
+  console.log('emitted');
 }
 </script>
 
@@ -71,7 +75,7 @@ function onSelectedChanged(items: Ref<OptionItem[]>): void {
           name="item"
           :item="item"
           :selected="isSelected(item)"
-          :mama="onClickOption(item)"
+          :on-click="() => onClickOption(item)"
         />
       </ul>
     </div>

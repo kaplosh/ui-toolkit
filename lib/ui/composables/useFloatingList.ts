@@ -30,9 +30,9 @@ export default function useFloatingList() {
     if (!floating.value?.contains(event.target)) {
       shown.value = false;
     }
-    if (reference.value?.contains(event.target)) {
-      event.stopPropagation();
-    }
+    //if (reference.value?.contains(event.target)) {
+      //event.stopPropagation();
+    //}
   }
 
   watch(floating, () => {

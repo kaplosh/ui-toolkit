@@ -19,8 +19,9 @@ const selectedItems = ref<ui.OptionItem[]>([]);
 //const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 
 function handleSelectedItems(updatedItems){
-  this.items = updatedItems;
-}
+  selectedItems.value = updatedItems;
+  return selectedItems;
+  }
 </script>
 
 <template>
@@ -38,7 +39,7 @@ function handleSelectedItems(updatedItems){
         <ui.controls.OptionsSelect
           :items="items"
           :selected="selectedItems"
-          @change="handleSelectedItems = $event"
+          @change="handleSelectedItems"
         >
           <template #selected="{ items }">
             <span v-if="!items.length">-</span>
@@ -48,6 +49,7 @@ function handleSelectedItems(updatedItems){
           <template #item="{ item, selected, onClick }">
             <li
               :class="['list-group-item', selected && 'active' ]"
+              @click="onClick"
             >
               {{ item.object.name }}
             </li>
