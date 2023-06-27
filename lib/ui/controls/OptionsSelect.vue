@@ -13,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits([ 'change' ]);
-const selectedItems = ref<ui.OptionItem[]>([]);
+//const selectedItems = ref<ui.OptionItem[]>([]);
 
 
 const {
@@ -29,17 +29,16 @@ function isSelected(item: ui.OptionItem): boolean {
 
 function onClickOption(item: ui.OptionItem): void {
   console.log('KKK');
-  if(!isSelected(item)) {
-    console.log(item);
-    selectedItems.value.push(item);
-    console.log('these are selected', selectedItems);
+  let newArray;
+  if(isSelected(item)) {
+    newArray = props.selected.filter(({ value }) => value !== item.value );
   } else {
-    selectedItems.value = this.props.selected.filter(item => item != item.id );
+    newArray = [ ...props.selected, item ];
   }
- onSelectedChanged(selectedItems);
+  onSelectedChanged(newArray);
 }
 
-function onSelectedChanged(items: Ref<OptionItem[]>): void {
+function onSelectedChanged(items: OptionItem[]): void {
   emit('change', items);
   console.log('emitted');
 }
