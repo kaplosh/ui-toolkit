@@ -33,14 +33,17 @@ function onClickOption(item: ui.OptionItem): void {
   if(isSelected(item)) {
     newArray = props.selected.filter(({ value }) => value !== item.value );
   } else {
-    newArray = [ ...props.selected, item ];
+    if(props.single){
+      newArray = [ item ];
+    } else {
+      newArray = [ ...props.selected, item ];
+    }
   }
   onSelectedChanged(newArray);
 }
 
 function onSelectedChanged(items: OptionItem[]): void {
   emit('change', items);
-  console.log('emitted');
 }
 </script>
 

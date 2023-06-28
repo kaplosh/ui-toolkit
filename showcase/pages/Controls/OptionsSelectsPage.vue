@@ -32,6 +32,7 @@ const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0)
         <ui.controls.OptionsSelect
           :items="items"
           :selected="selectedItems"
+          :single="false"
           @change="selectedItems = $event"
         >
           <template #selected="{ items }">
