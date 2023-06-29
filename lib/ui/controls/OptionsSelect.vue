@@ -5,7 +5,7 @@ import { OptionItem } from '../types';
 
 
 interface Props {
-  items?: ui.OptionItem[];
+  items: ui.OptionItem[];
   selected: ui.OptionItem[];
   single?: boolean;
 }
@@ -22,7 +22,7 @@ const {
 } = useFloatingList();
 
 function isSelected(item: ui.OptionItem): boolean {
-  return props.selected.includes(item);
+  return !!props.selected.find(({ value }) => value === item.value );
 }
 
 function onClickOption(item: ui.OptionItem): void {
