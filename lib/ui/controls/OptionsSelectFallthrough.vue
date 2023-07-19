@@ -26,7 +26,6 @@ function check(){
       if (extraObjectIndex !== -1) {
         selectedItemsInDropdown.value.splice(extraObjectIndex, 1);
       }
-
     }
 }
 
