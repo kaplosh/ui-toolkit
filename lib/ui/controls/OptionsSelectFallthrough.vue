@@ -16,7 +16,21 @@ const items: ui.OptionItem[] = records.map(record => ({
 }));
 
 const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const itemsForDropdown = ref(selectedItemsOptionsSelectMultiple);
 const selectedItemsInDropdown = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+
+function check(){
+    const areEqual = selectedItemsInDropdown.value.every((item) => itemsForDropdown.value.includes(item));
+    if(!areEqual){
+      let extraObjectIndex = selectedItemsInDropdown.value.findIndex(obj2 => !itemsForDropdown.value.some(obj1 => obj1.value === obj2.value));
+      if (extraObjectIndex !== -1) {
+        selectedItemsInDropdown.value.splice(extraObjectIndex, 1);
+        console.log('done');
+      }
+
+    }
+}
+
 </script>
 
 <template>
@@ -29,7 +43,7 @@ const selectedItemsInDropdown = ref(items.filter(item => Number(item.object.id) 
           :items="items"
           :selected="selectedItemsOptionsSelectMultiple"
           :single="false"
-          @change="selectedItemsOptionsSelectMultiple = $event"
+          @change="selectedItemsOptionsSelectMultiple = $event; check()"
         >
           <template #item="{ item, selected, onClick }">
             <li
@@ -45,7 +59,7 @@ const selectedItemsInDropdown = ref(items.filter(item => Number(item.object.id) 
         multiple option select dropdown step 2:
         <br>
         <ui.controls.OptionsSelectDropdown
-          :items="selectedItemsOptionsSelectMultiple"
+          :items="itemsForDropdown"
           :selected="selectedItemsInDropdown"
           :single="false"
           @change="selectedItemsInDropdown = $event"
