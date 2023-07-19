@@ -2,7 +2,7 @@
 import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
 import { ref } from 'vue';
-import OptionsSelectDropdown from "../../../lib/ui/controls/OptionsSelectDropdown.vue";
+
 
 const records = [
   { id: '', name: '' },
@@ -16,8 +16,10 @@ const items: ui.OptionItem[] = records.map(record => ({
   object: record,
 }));
 
-const selectedItemsSingle = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const selectedItemsMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const selectedItemsDropdownSingle = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const selectedItemsDropdownMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const selectedItemsOptionsSelectSingle = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 </script>
 
 <template>
@@ -34,9 +36,9 @@ const selectedItemsMultiple = ref(items.filter(item => Number(item.object.id) % 
         <br>
         <ui.controls.OptionsSelectDropdown
           :items="items"
-          :selected="selectedItemsSingle"
+          :selected="selectedItemsDropdownSingle"
           :single="true"
-          @change="selectedItemsSingle = $event"
+          @change="selectedItemsDropdownSingle = $event"
         >
           <template #selected="{ items }">
             <span v-if="!items.length">-</span>
@@ -58,9 +60,9 @@ const selectedItemsMultiple = ref(items.filter(item => Number(item.object.id) % 
         <br>
         <ui.controls.OptionsSelectDropdown
           :items="items"
-          :selected="selectedItemsMultiple"
+          :selected="selectedItemsDropdownMultiple"
           :single="false"
-          @change="selectedItemsMultiple = $event"
+          @change="selectedItemsDropdownMultiple = $event"
         >
           <template #selected="{ items }">
             <span v-if="!items.length">-</span>
@@ -76,6 +78,44 @@ const selectedItemsMultiple = ref(items.filter(item => Number(item.object.id) % 
             </li>
           </template>
         </ui.controls.OptionsSelectDropdown>
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        option select single:
+        <br>
+        <ui.controls.OptionsSelect
+          :items="items"
+          :selected="selectedItemsOptionsSelectSingle"
+          :single="true"
+          @change="selectedItemsOptionsSelectSingle = $event"
+        >
+          <template #item="{ item, selected, onClick }">
+            <li
+              :class="['list-group-item', selected && 'active' ]"
+              @click="onClick"
+            >
+              {{ item.object.name }}
+            </li>
+          </template>
+        </ui.controls.OptionsSelect>
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        option select multiple:
+        <br>
+        <ui.controls.OptionsSelect
+          :items="items"
+          :selected="selectedItemsOptionsSelectMultiple"
+          :single="false"
+          @change="selectedItemsOptionsSelectMultiple = $event"
+        >
+          <template #item="{ item, selected, onClick }">
+            <li
+              :class="['list-group-item', selected && 'active' ]"
+              @click="onClick"
+            >
+              {{ item.object.name }}
+            </li>
+          </template>
+        </ui.controls.OptionsSelect>
       </div>
     </PageExamplesSection>
   </div>
