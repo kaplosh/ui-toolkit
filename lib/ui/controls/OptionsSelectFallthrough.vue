@@ -22,11 +22,8 @@ const selectedItemsInDropdown = ref(items.filter(item => Number(item.object.id) 
 function check(){
     const areEqual = selectedItemsInDropdown.value.every((item) => itemsForDropdown.value.includes(item));
     if(!areEqual){
-      let extraObjectIndex = selectedItemsInDropdown.value.findIndex(obj2 => !itemsForDropdown.value.some(obj1 => obj1.value === obj2.value));
-      if (extraObjectIndex !== -1) {
-        selectedItemsInDropdown.value.splice(extraObjectIndex, 1);
-      }
-
+      const extraObjectIndex = selectedItemsInDropdown.value.findIndex(obj2 => !itemsForDropdown.value.some(obj1 => obj1.value === obj2.value));
+      selectedItemsInDropdown.value.splice(extraObjectIndex, 1);
     }
 }
 
