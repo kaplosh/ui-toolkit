@@ -9,6 +9,8 @@ const records = [
   { id: '1', name: 'Hyenk Nguyen' },
   { id: '2', name: 'Vilem Vilemovic' },
   { id: '3', name: 'Jarmil Krasomil' },
+  { id: '4', name: 'Lopata Lopatovich' },
+  { id: '5', name: 'Jakakoliv Ex Tveho Výběru' },
 ];
 
 const items: ui.OptionItem[] = records.map(record => ({

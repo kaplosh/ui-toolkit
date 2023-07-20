@@ -48,12 +48,17 @@ function onSelectedChanged(items: OptionItem[]): void {
         :item="item"
         :selected="isSelected(item)"
         :on-click="() => onClickOption(item)"
+        class="list-group-item"
       />
     </ul>
   </div>
 </template>
 
 <style scoped>
+.list-group {
+  max-height: 100px;
+  overflow-y: auto;
+}
 .list-group-item {
   cursor: pointer;
 }

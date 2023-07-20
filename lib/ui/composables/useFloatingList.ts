@@ -20,8 +20,11 @@ export default function useFloatingList() {
           const floatingWidth = Math.floor(rects.floating.width);
           if (floatingWidth < referenceWidth) {
             floatingRef.style.minWidth = `${rects.reference.width}px`;
-          }
-        },
+            }
+          Object.assign(floatingRef.style, {
+            maxHeight: `${100}px`,
+          });
+          },
       }),
     ],
   });
