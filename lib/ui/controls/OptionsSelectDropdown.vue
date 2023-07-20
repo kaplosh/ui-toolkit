@@ -81,10 +81,11 @@ function onSelectedChanged(items: OptionItem[]): void {
 </template>
 
 <style scoped>
+.list-group{
+  max-height: 100px;
+  overflow-y: scroll;
+}
 .list-group-item {
   cursor: pointer;
-}
-.list-group{
-  overflow-y: auto;
 }
 </style>

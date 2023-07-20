@@ -21,9 +21,6 @@ export default function useFloatingList() {
           if (floatingWidth < referenceWidth) {
             floatingRef.style.minWidth = `${rects.reference.width}px`;
             }
-          Object.assign(floatingRef.style, {
-            maxHeight: `${100}px`,
-          });
           },
       }),
     ],

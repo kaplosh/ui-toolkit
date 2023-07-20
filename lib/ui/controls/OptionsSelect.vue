@@ -57,7 +57,7 @@ function onSelectedChanged(items: OptionItem[]): void {
 <style scoped>
 .list-group {
   max-height: 100px;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 .list-group-item {
   cursor: pointer;

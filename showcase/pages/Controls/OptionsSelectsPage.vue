@@ -5,12 +5,18 @@ import { ref } from 'vue';
 
 
 const records = [
-  { id: '', name: '' },
+  { id: '', name: 'blank' },
   { id: '1', name: 'Hyenk Nguyen' },
-  { id: '2', name: 'Vilem Vilemovic' },
+  { id: '2', name: 'Vilem Vilemovich' },
   { id: '3', name: 'Jarmil Krasomil' },
   { id: '4', name: 'Lopata Lopatovich' },
   { id: '5', name: 'Jakakoliv Ex Tveho Výběru' },
+  { id: '6', name: 'Schmetle Petlich' },
+  { id: '7', name: 'Hyenk Nguyen' },
+  { id: '8', name: 'Vilem Vilemovic' },
+  { id: '9', name: 'Jarmil Krasomil' },
+  { id: '10', name: 'Lopata Lopatovich' },
+  { id: '11', name: 'Jakakoliv Ex Tveho Výběru' },
 ];
 
 const items: ui.OptionItem[] = records.map(record => ({
