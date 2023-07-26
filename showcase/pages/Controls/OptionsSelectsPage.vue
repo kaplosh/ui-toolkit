@@ -24,10 +24,10 @@ const items: ui.OptionItem[] = records.map(record => ({
   object: record,
 }));
 
-const selectedItemsDropdownSingle = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const selectedItemsDropdownMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const selectedItemsOptionsSelectSingle = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const select1 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const select2 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const select3 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 </script>
 
 <template>
@@ -45,9 +45,9 @@ const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.
           <br>
           <ui.controls.OptionsSelectDropdown
             :items="items"
-            :selected="selectedItemsDropdownSingle"
+            :selected="select1"
             :single="true"
-            @change="selectedItemsDropdownSingle = $event"
+            @change="select1 = $event"
           >
             <template #selected="{ items }">
               <span v-if="!items.length">-</span>
@@ -69,9 +69,9 @@ const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.
           <br>
           <ui.controls.OptionsSelectDropdown
             :items="items"
-            :selected="selectedItemsDropdownMultiple"
+            :selected="select2"
             :single="false"
-            @change="selectedItemsDropdownMultiple = $event"
+            @change="select2 = $event"
           >
             <template #selected="{ items }">
               <span v-if="!items.length">-</span>
@@ -93,9 +93,9 @@ const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.
           <br>
           <ui.controls.OptionsSelect
             :items="items"
-            :selected="selectedItemsOptionsSelectSingle"
+            :selected="select3"
             :single="true"
-            @change="selectedItemsOptionsSelectSingle = $event"
+            @change="select3 = $event"
           >
             <template #item="{ item, selected, onClick }">
               <li
@@ -112,9 +112,9 @@ const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.
           <br>
           <ui.controls.OptionsSelect
             :items="items"
-            :selected="selectedItemsOptionsSelectMultiple"
+            :selected="select4"
             :single="false"
-            @change="selectedItemsOptionsSelectMultiple = $event"
+            @change="select4 = $event"
           >
             <template #item="{ item, selected, onClick }">
               <li
@@ -129,6 +129,8 @@ const selectedItemsOptionsSelectMultiple = ref(items.filter(item => Number(item.
       </div>
 
       <div class="row">
+        <h1 class="mt-lg-5">Special cases</h1>
+        <h2>Connected fallthrough selects</h2>
         <ui.controls.OptionsSelectFallthrough/>
       </div>
     </PageExamplesSection>
