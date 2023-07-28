@@ -50,9 +50,9 @@ const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
             @change="select1 = $event"
           >
             <template #selected="{ items }">
-              <span v-if="!items.length">-</span>
-              <span v-if="items.length === 1">{{ items[0].object.name }}</span>
-              <span v-if="items.length > 1">[ {{ items.length }} ]</span>
+              <span class="btn btn-secondary" v-if="!items.length">-</span>
+              <span class="btn btn-secondary" v-if="items.length === 1">{{ items[0].object.name }}</span>
+              <span class="btn btn-secondary" v-if="items.length > 1">[ {{ items.length }} ]</span>
             </template>
             <template #item="{ item, selected, onClick }">
               <li
@@ -74,9 +74,18 @@ const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
             @change="select2 = $event"
           >
             <template #selected="{ items }">
-              <span v-if="!items.length">-</span>
-              <span v-if="items.length === 1">{{ items[0].object.name }}</span>
-              <span v-if="items.length > 1">[ {{ items.length }} ]</span>
+              <span
+                v-if="!items.length"
+                class="btn btn-secondary"
+              >-</span>
+              <span
+                v-if="items.length === 1"
+                class="btn btn-secondary"
+              >{{ items[0].object.name }}</span>
+              <span
+                v-if="items.length > 1"
+                class="btn btn-secondary"
+              >[ {{ items.length }} ]</span>
             </template>
             <template #item="{ item, selected, onClick }">
               <li
@@ -129,9 +138,11 @@ const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
       </div>
 
       <div class="row">
-        <h1 class="mt-lg-5">Special cases</h1>
+        <h1 class="mt-lg-5">
+          Special cases
+        </h1>
         <h2>Connected fallthrough selects</h2>
-        <ui.controls.OptionsSelectFallthrough/>
+        <ui.controls.OptionsSelectFallthrough />
       </div>
     </PageExamplesSection>
   </div>

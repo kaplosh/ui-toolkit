@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ui} from '@ema/ui-toolkit';
+import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
 </script>
 

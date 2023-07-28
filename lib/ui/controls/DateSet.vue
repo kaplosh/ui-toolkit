@@ -4,10 +4,9 @@
 </script>
 
 <template>
-Negre
-<Op
+  <div>
+    Ble
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+  <style scoped />
