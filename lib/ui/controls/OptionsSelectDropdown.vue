@@ -1,9 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import useFloatingList from '../composables/useFloatingList';
-import { OptionItem } from '../types';
-
-
+import { ref, watch } from 'vue';
+const emit = defineEmits([ 'change' ]);
 interface Props {
   items: ui.OptionItem[];
   selected: ui.OptionItem[];
@@ -11,72 +9,46 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits([ 'change' ]);
+const select = ref( props.selected);
+
+watch(select, (newSelect)=>
+  emit('change', newSelect));
 
 
-const {
-  reference,
-  floating,
-  shown,
-  floatingStyles,
-} = useFloatingList();
 
-function isSelected(item: ui.OptionItem): boolean {
-  return !!props.selected.find(({ value }) => value === item.value );
-}
-
-function onClickOption(item: ui.OptionItem): void {
-  let newArray;
-  if(isSelected(item)) {
-    newArray = props.selected.filter(({ value }) => value !== item.value );
-  } else {
-    if(props.single){
-      newArray = [ item ];
-    } else {
-      newArray = [ ...props.selected, item ];
-    }
-  }
-  onSelectedChanged(newArray);
-}
-
-function onSelectedChanged(items: OptionItem[]): void {
-  emit('change', items);
-}
 </script>
 
 <template>
   <div class="d-inline-block">
-    <div
-      ref="reference"
-      style="border: 1px solid green"
-      @click="shown = true"
+    <ui.OptionsSelectDropdown
+      :items="props.items"
+      :selected="props.selected"
+      :single="props.single"
+      @change="select = $event"
     >
-      <div class="d-flex">
-        <div>
-          <slot
-            name="selected"
-            :items="props.selected"
-          />
-        </div>
-        <div />
-      </div>
-      <ul
-        v-if="shown"
-        ref="floating"
-        class="list-group"
-        :style="floatingStyles"
-      >
-        <slot
-          v-for="item of items"
-          :key="item.value"
-          name="item"
-          :item="item"
-          :selected="isSelected(item)"
-          :on-click="() => onClickOption(item)"
-          class="list-group-item"
-        />
-      </ul>
-    </div>
+      <template #selected="{ items }">
+        <span
+          v-if="!items.length"
+          class="btn btn-secondary"
+        >-</span>
+        <span
+          v-if="items.length === 1"
+          class="btn btn-secondary"
+        >{{ items[0].object.name }}</span>
+        <span
+          v-if="items.length > 1"
+          class="btn btn-secondary"
+        >[ {{ items.length }} ]</span>
+      </template>
+      <template #item="{ item, selected, onClick }">
+        <li
+          :class="['list-group-item', selected && 'active' ]"
+          @click="onClick"
+        >
+          {{ item.object.name }}
+        </li>
+      </template>
+    </ui.OptionsSelectDropdown>
   </div>
 </template>
 
