@@ -46,3 +46,18 @@ export const recordsDays = [
   { id: '30', name: '30' },
   { id: '31', name: '31' },
 ];
+
+export const recordsYears = [
+  { id: '1', name: '2000' },
+  { id: '2', name: '2001' },
+  { id: '3', name: '2003' },
+  { id: '4', name: '2004' },
+  { id: '5', name: '2005' },
+  { id: '6', name: '2006' },
+  { id: '7', name: '2007' },
+  { id: '8', name: '2008' },
+  { id: '9', name: '2009' },
+  { id: '10', name: '2010' },
+  { id: '11', name: '2011' },
+  { id: '12', name: '2012' },
+];
