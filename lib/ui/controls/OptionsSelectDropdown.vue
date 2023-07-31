@@ -29,15 +29,15 @@ watch(select, (newSelect)=>
       <template #selected="{ items }">
         <span
           v-if="!items.length"
-          class="btn btn-secondary"
+          class="btn btn-primary"
         >-</span>
         <span
           v-if="items.length === 1"
-          class="btn btn-secondary"
+          class="btn btn-primary"
         >{{ items[0].object.name }}</span>
         <span
           v-if="items.length > 1"
-          class="btn btn-secondary"
+          class="btn btn-primary"
         >[ {{ items.length }} ]</span>
       </template>
       <template #item="{ item, selected, onClick }">

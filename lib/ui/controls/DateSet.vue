@@ -64,28 +64,6 @@ function setDays(){
           :single="true"
           @change="select1 = $event"
         >
-          <template #selected="{ items }">
-            <span
-              v-if="!items.length"
-              class="btn btn-secondary"
-            >-</span>
-            <span
-              v-if="items.length === 1"
-              class="btn btn-secondary"
-            >{{ items[0].object.name }}</span>
-            <span
-              v-if="items.length > 1"
-              class="btn btn-secondary"
-            >[ {{ items.length }} ]</span>
-          </template>
-          <template #item="{ item, selected, onClick }">
-            <li
-              :class="['list-group-item', selected && 'active' ]"
-              @click="onClick"
-            >
-              {{ item.object.name }}
-            </li>
-          </template>
         </ui.controls.OptionsSelectDropdown>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
@@ -97,28 +75,6 @@ function setDays(){
           @change="select2 = $event;"
           @click="setDays()"
         >
-          <template #selected="{ items }">
-            <span
-              v-if="!items.length"
-              class="btn btn-secondary"
-            >-</span>
-            <span
-              v-if="items.length === 1"
-              class="btn btn-secondary"
-            >{{ items[0].object.name }}</span>
-            <span
-              v-if="items.length > 1"
-              class="btn btn-secondary"
-            >[ {{ items.length }} ]</span>
-          </template>
-          <template #item="{ item, selected, onClick }">
-            <li
-              :class="['list-group-item', selected && 'active' ]"
-              @click="onClick"
-            >
-              {{ item.object.name }}
-            </li>
-          </template>
         </ui.controls.OptionsSelectDropdown>
       </div>
       <div class="col-md-6 col-lg-4 col-xl-3">
@@ -129,28 +85,6 @@ function setDays(){
           :single="true"
           @change="select3 = $event"
         >
-          <template #selected="{ items }">
-            <span
-              v-if="!items.length"
-              class="btn btn-secondary"
-            >-</span>
-            <span
-              v-if="items.length === 1"
-              class="btn btn-secondary"
-            >{{ items[0].object.name }}</span>
-            <span
-              v-if="items.length > 1"
-              class="btn btn-secondary"
-            >[ {{ items.length }} ]</span>
-          </template>
-          <template #item="{ item, selected, onClick }">
-            <li
-              :class="['list-group-item', selected && 'active' ]"
-              @click="onClick"
-            >
-              {{ item.object.name }}
-            </li>
-          </template>
         </ui.controls.OptionsSelectDropdown>
       </div>
     </div>
