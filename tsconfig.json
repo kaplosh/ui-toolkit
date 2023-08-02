@@ -9,6 +9,7 @@
     "noImplicitAny": false,
     "noEmit": true,
     "jsx": "preserve",
+    "types": [ "vue" ],
     "baseUrl": ".",
     "paths": {
       "@ema/ui-toolkit": [ "lib" ]

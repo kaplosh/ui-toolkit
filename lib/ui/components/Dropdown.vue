@@ -1,12 +1,12 @@
 <script lang="ts" setup="">
-import useFloatingList from '../composables/useFloatingList';
+import { ui } from '@ema/ui-toolkit';
 
 const {
   reference,
   floating,
   shown,
   floatingStyles,
-} = useFloatingList();
+} = ui.useFloatingList({});
 </script>
 
 <template>
@@ -21,13 +21,13 @@ const {
     >
       Dropdown button
     </button>
-    <ul
+    <div
       v-if="shown"
       ref="floating"
       class="dropdown-menu show"
       :style="floatingStyles"
     >
       <slot />
-    </ul>
+    </div>
   </div>
 </template>

@@ -1,13 +1,18 @@
 import { ref, watch } from 'vue';
 import { autoUpdate, flip, shift, size, useFloating } from '@floating-ui/vue';
+import { Placement } from '@floating-ui/core/src/types';
 
-export default function useFloatingList() {
+export default function useFloatingList({
+  placement = 'bottom-start',
+}: {
+  placement?: Placement
+}) {
   const shown = ref(false);
   const reference = ref<null | HTMLElement>(null);
   const floating = ref<null | HTMLUListElement>(null);
 
   const { floatingStyles } = useFloating(reference, floating, {
-    placement: 'bottom-start',
+    placement,
     whileElementsMounted: autoUpdate,
     middleware: [
       flip(),
@@ -20,8 +25,8 @@ export default function useFloatingList() {
           const floatingWidth = Math.floor(rects.floating.width);
           if (floatingWidth < referenceWidth) {
             floatingRef.style.minWidth = `${rects.reference.width}px`;
-            }
-          },
+          }
+        },
       }),
     ],
   });
@@ -30,9 +35,9 @@ export default function useFloatingList() {
     if (!floating.value?.contains(event.target)) {
       shown.value = false;
     }
-    //if (reference.value?.contains(event.target)) {
-      //event.stopPropagation();
-    //}
+    if (reference.value?.contains(event.target)) {
+      event.stopPropagation();
+    }
   }
 
   watch(floating, () => {

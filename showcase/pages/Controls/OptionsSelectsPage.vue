@@ -24,6 +24,7 @@ const items: ui.OptionItem[] = records.map(record => ({
   object: record,
 }));
 
+// TODO t131 do not repeat yourself!
 const select1 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 const select2 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
 const select3 = ref(items.filter(item => Number(item.object.id) % 2 === 0));

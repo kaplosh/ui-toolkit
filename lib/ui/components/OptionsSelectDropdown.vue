@@ -1,6 +1,5 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import useFloatingList from '../composables/useFloatingList';
 import { OptionItem } from '../types';
 
 
@@ -19,7 +18,7 @@ const {
   floating,
   shown,
   floatingStyles,
-} = useFloatingList();
+} = ui.useFloatingList();
 
 function isSelected(item: ui.OptionItem): boolean {
   return !!props.selected.find(({ value }) => value === item.value );

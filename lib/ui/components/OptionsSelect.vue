@@ -1,20 +1,25 @@
 <script lang="ts" setup="">
+// TODO t131 all the comments in this file
 import { ui } from '@ema/ui-toolkit';
-import useFloatingList from '../composables/useFloatingList';
-import { OptionItem } from '../types';
-
+import { OptionItem } from '../types'; // do not use direct import, use `ui.OptionItem`
 
 interface Props {
-  items: ui.OptionItem[];
-  selected: ui.OptionItem[];
-  single?: boolean;
+  items: ui.OptionItem[]; // rename to `options`
+  selected: ui.OptionItem[]; // rename to `value`
+  single?: boolean; // rename (and revert logic) to `miltuple`
+  maxHeight?: number;
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits([ 'change' ]);
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    maxHeight: 150,
+  },
+);
+const emit = defineEmits([ 'change' ]); // rename to `input`
 
 function isSelected(item: ui.OptionItem): boolean {
-  return !!props.selected.find(({ value }) => value === item.value );
+  return props.selected.includes(item);
 }
 
 function onClickOption(item: ui.OptionItem): void {
@@ -31,35 +36,24 @@ function onClickOption(item: ui.OptionItem): void {
   onSelectedChanged(newArray);
 }
 
+// inline this call (remove this function)
 function onSelectedChanged(items: OptionItem[]): void {
   emit('change', items);
 }
 </script>
 
 <template>
-  <div class="d-inline-block">
-    <ul
-      class="list-group"
-    >
-      <slot
-        v-for="item of items"
-        :key="item.value"
-        name="item"
-        :item="item"
-        :selected="isSelected(item)"
-        :on-click="() => onClickOption(item)"
-        class="list-group-item"
-      />
-    </ul>
-  </div>
+  <ul
+    class="list-group overflow-y-scroll"
+    :style="{ maxHeight: `${props.maxHeight}px` }"
+  >
+    <slot
+      v-for="item of items"
+      :key="item.value"
+      name="item"
+      :item="item"
+      :selected="isSelected(item)"
+      :on-click="() => onClickOption(item)"
+    />
+  </ul>
 </template>
-
-<style scoped>
-.list-group {
-  max-height: 100px;
-  overflow-y: scroll;
-}
-.list-group-item {
-  cursor: pointer;
-}
-</style>
