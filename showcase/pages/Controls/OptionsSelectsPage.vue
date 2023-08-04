@@ -24,11 +24,12 @@ const items: ui.OptionItem[] = records.map(record => ({
   object: record,
 }));
 
-// TODO t131 do not repeat yourself!
-const select1 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const select2 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const select3 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
+const selectDefault = items.filter(item => Number(item.object.id) % 2 === 0);
+
+const select1 = ref(selectDefault);
+const select2 = ref(selectDefault);
+const select3 = ref(selectDefault);
+const select4 = ref(selectDefault);
 </script>
 
 <template>
@@ -44,42 +45,110 @@ const select4 = ref(items.filter(item => Number(item.object.id) % 2 === 0));
         <div class="col-md-6 col-lg-4 col-xl-3">
           single option select dropdown:
           <br>
-          <ui.controls.OptionsSelectDropdown
-            :single="true"
-            :items="items"
-            :selected="select1"
-            @change="select1 = $event"
-          />
+          <div class="d-inline-block">
+            <ui.controls.OptionsSelectDropdown
+              :options="items"
+              :value="select1"
+              :multiple="true"
+              @change="select1 = $event"
+            >
+              <template #selected="{ items }">
+                <span
+                  v-if="!items.length"
+                  class="btn btn-primary"
+                >-</span>
+                <span
+                  v-if="items.length === 1"
+                  class="btn btn-primary"
+                >{{ items[0].object.name }}</span>
+                <span
+                  v-if="items.length > 1"
+                  class="btn btn-primary"
+                >[ {{ items.length }} ]</span>
+              </template>
+              <template #item="{ item, selected, onClick }">
+                <li
+                  :class="['list-group-item', selected && 'active' ]"
+                  @click="onClick"
+                >
+                  {{ item.object.name }}
+                </li>
+              </template>
+            </ui.controls.OptionsSelectDropdown>
+          </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xl-3">
           multiple option select dropdown:
           <br>
-          <ui.controls.OptionsSelectDropdown
-            :single="false"
-            :items="items"
-            :selected="select2"
-            @change="select2 = $event"
-          />
+          <div class="d-inline-block">
+            <ui.controls.OptionsSelectDropdown
+              :options="items"
+              :value="select2"
+              :multiple="true"
+              @change="select2 = $event"
+            >
+              <template #selected="{ items }">
+                <span
+                  v-if="!items.length"
+                  class="btn btn-primary"
+                >-</span>
+                <span
+                  v-if="items.length === 1"
+                  class="btn btn-primary"
+                >{{ items[0].object.name }}</span>
+                <span
+                  v-if="items.length > 1"
+                  class="btn btn-primary"
+                >[ {{ items.length }} ]</span>
+              </template>
+              <template #item="{ item, selected, onClick }">
+                <li
+                  :class="['list-group-item', selected && 'active' ]"
+                  @click="onClick"
+                >
+                  {{ item.object.name }}
+                </li>
+              </template>
+            </ui.controls.OptionsSelectDropdown>
+          </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xl-3">
           single option select:
           <br>
           <ui.controls.OptionsSelect
-            :items="items"
-            :selected="select3"
-            :single="true"
+            :options="items"
+            :value="select3"
+            :multiple="false"
             @change="select3 = $event"
-          />
+          >
+            <template #item="{ item, selected, onClick }">
+              <li
+                :class="['list-group-item', selected && 'active' ]"
+                @click="onClick"
+              >
+                {{ item.object.name }}
+              </li>
+            </template>
+          </ui.controls.OptionsSelect>
         </div>
         <div class="col-md-6 col-lg-4 col-xl-3">
           multiple option select:
           <br>
           <ui.controls.OptionsSelect
-            :items="items"
-            :selected="select4"
-            :single="false"
+            :options="items"
+            :value="select4"
+            :multiple="true"
             @change="select4 = $event"
-          />
+          >
+            <template #item="{ item, selected, onClick }">
+              <li
+                :class="['list-group-item', selected && 'active' ]"
+                @click="onClick"
+              >
+                {{ item.object.name }}
+              </li>
+            </template>
+          </ui.controls.OptionsSelect>
         </div>
       </div>
 

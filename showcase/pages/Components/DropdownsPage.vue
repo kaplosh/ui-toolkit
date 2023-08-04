@@ -2,6 +2,30 @@
 import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
 import ExampleItem from '../../components/ExampleItem.vue';
+import { ref } from 'vue';
+const records = [
+  { id: '', name: 'blank' },
+  { id: '1', name: 'Hyenk Nguyen' },
+  { id: '2', name: 'Vilem Vilemovich' },
+  { id: '3', name: 'Jarmil Krasomil' },
+  { id: '4', name: 'Lopata Lopatovich' },
+  { id: '5', name: 'Jakakoliv Ex Tveho Výběru' },
+  { id: '6', name: 'Schmetle Petlich' },
+  { id: '7', name: 'Hyenk Nguyen' },
+  { id: '8', name: 'Vilem Vilemovic' },
+  { id: '9', name: 'Jarmil Krasomil' },
+  { id: '10', name: 'Lopata Lopatovich' },
+  { id: '11', name: 'Jakakoliv Ex Tveho Výběru' },
+];
+
+const items: ui.OptionItem[] = records.map(record => ({
+  value: record.id,
+  object: record,
+}));
+
+const selectDefault = items.filter(item => Number(item.object.id) % 2 === 0);
+
+const select = ref(selectDefault);
 </script>
 
 <template>
@@ -16,7 +40,11 @@ import ExampleItem from '../../components/ExampleItem.vue';
       <ExampleItem
         text="dropdown list"
       >
-        <ui.Dropdown>
+        <ui.Dropdown
+          :options="items"
+          :value="select"
+          :multiple="true"
+        >
           <a
             class="dropdown-item"
             href="#"
@@ -34,19 +62,12 @@ import ExampleItem from '../../components/ExampleItem.vue';
       <ExampleItem
         text="custom content"
       >
-        <ui.Dropdown>
-          <ul class="m-2 list-group">
-            <li class="list-group-item list-group-item-action">
-              text 1
-            </li>
-            <li class="list-group-item list-group-item-action active">
-              text 2
-            </li>
-          </ul>
-          <p class="text-center">
-            some text
-          </p>
-        </ui.Dropdown>
+        <ui.Dropdown
+          :options="items"
+          :value="select"
+          :multiple="true"
+          @input="select = $event"
+        />
       </ExampleItem>
     </PageExamplesSection>
   </div>

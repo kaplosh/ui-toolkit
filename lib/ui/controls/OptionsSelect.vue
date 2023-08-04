@@ -1,48 +1,55 @@
 <script lang="ts" setup="">
+// TODO t131 all the comments in this file
 import { ui } from '@ema/ui-toolkit';
-import { ref, watch } from 'vue';
-const emit = defineEmits([ 'change' ]);
 
 
 interface Props {
-  items: ui.OptionItem[];
-  selected: ui.OptionItem[];
-  single?: boolean;
+  options: ui.OptionItem[];
+  value: ui.OptionItem[];
+  multiple: boolean;
+  maxHeight?: number;
 }
 
-const props = defineProps<Props>();
-const select = ref( props.selected);
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    maxHeight: 150,
+  },
+);
+const emit = defineEmits([ 'change' ]); // rename to `input`
 
-watch(select, (newSelect)=>
-  emit('change', newSelect));
+function isSelected(item: ui.OptionItem): boolean {
+  return props.value.includes(item);
+}
 
+function onClickOption(item: ui.OptionItem): void {
+  let newArray;
+  if (isSelected(item)) {
+    newArray = props.value.filter(({ value }) => value !== item.value );
+  } else {
+    if (!props.multiple){
+      newArray = [ item ];
+    } else {
+      newArray = [ ...props.value, item ];
+    }
+  }
+  emit('change', newArray);
+}
 
 </script>
 
 <template>
-  <ui.OptionsSelect
-    :items="props.items"
-    :selected="props.selected"
-    :single="props.single"
-    @change="select = $event"
+  <ul
+    class="list-group overflow-y-scroll"
+    :style="{ maxHeight: `${props.maxHeight}px` }"
   >
-    <template #item="{ item, selected, onClick }">
-      <li
-        :class="['list-group-item', selected && 'active' ]"
-        @click="onClick"
-      >
-        {{ item.object.name }}
-      </li>
-    </template>
-  </ui.OptionsSelect>
+    <slot
+      v-for="item of options"
+      :key="item.value"
+      name="item"
+      :item="item"
+      :selected="isSelected(item)"
+      :on-click="() => onClickOption(item)"
+    />
+  </ul>
 </template>
-
-<style scoped>
-.list-group {
-  max-height: 100px;
-  overflow-y: scroll;
-}
-.list-group-item {
-  cursor: pointer;
-}
-</style>

@@ -1,4 +1,5 @@
 <script lang="ts" setup="">
+/*
 import { ui } from '@ema/ui-toolkit';
 import { OptionItem } from '../types';
 
@@ -18,7 +19,7 @@ const {
   floating,
   shown,
   floatingStyles,
-} = ui.useFloatingList();
+} = ui.useFloatingList('bottom-start');
 
 function isSelected(item: ui.OptionItem): boolean {
   return !!props.selected.find(({ value }) => value === item.value );
@@ -26,10 +27,10 @@ function isSelected(item: ui.OptionItem): boolean {
 
 function onClickOption(item: ui.OptionItem): void {
   let newArray;
-  if(isSelected(item)) {
+  if (isSelected(item)) {
     newArray = props.selected.filter(({ value }) => value !== item.value );
   } else {
-    if(props.single){
+    if (props.single){
       newArray = [ item ];
     } else {
       newArray = [ ...props.selected, item ];
@@ -40,9 +41,9 @@ function onClickOption(item: ui.OptionItem): void {
 
 function onSelectedChanged(items: OptionItem[]): void {
   emit('change', items);
-}
+}*/
 </script>
-
+<!--
 <template>
   <div class="d-inline-block">
     <div
@@ -88,3 +89,4 @@ function onSelectedChanged(items: OptionItem[]): void {
   cursor: pointer;
 }
 </style>
+-->

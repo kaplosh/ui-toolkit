@@ -1,3 +1,10 @@
+
+<template>
+  <div>
+    5
+  </div>
+</template>
+<!--
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref } from 'vue';
@@ -80,3 +87,4 @@ function check(){
     </div>
   </div>
 </template>
+-->
