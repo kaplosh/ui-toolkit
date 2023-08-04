@@ -92,5 +92,5 @@ function onClickOption(item: ui.OptionItem): void {
 </style>
 -->
 <script setup>
-import OptionsSelectDropdown from "@ema/ui-toolkit/ui/components/OptionsSelectDropdown.vue";
+import OptionsSelectDropdown from '@ema/ui-toolkit/ui/components/OptionsSelectDropdown.vue';
 </script>

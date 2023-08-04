@@ -25,7 +25,8 @@ const items: ui.OptionItem[] = records.map(record => ({
 
 const selectDefault = items.filter(item => Number(item.object.id) % 2 === 0);
 
-const select = ref(selectDefault);
+const select1 = ref(selectDefault);
+const select2 = ref(selectDefault);
 </script>
 
 <template>
@@ -42,8 +43,9 @@ const select = ref(selectDefault);
       >
         <ui.Dropdown
           :options="items"
-          :value="select"
+          :value="select1"
           :multiple="true"
+          @input="select1 = $event"
         >
           <a
             class="dropdown-item"
@@ -64,9 +66,9 @@ const select = ref(selectDefault);
       >
         <ui.Dropdown
           :options="items"
-          :value="select"
+          :value="select2"
           :multiple="true"
-          @input="select = $event"
+          @input="select2 = $event"
         />
       </ExampleItem>
     </PageExamplesSection>
