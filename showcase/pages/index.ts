@@ -1,9 +1,10 @@
 import { Component } from 'vue';
 
 import HomePage from './HomePage.vue';
-import ComponentsPage from './ComponentsPage/ComponentsPage.vue';
+import Components_DropdownPage from './Components/DropdownsPage.vue';
 import Controls_TextInputsPage from './Controls/TextInputsPage.vue';
 import Controls_OptionsSelectsPage from './Controls/OptionsSelectsPage.vue';
+import Controls_DateSetPage from './Controls/DateSetPage.vue';
 
 interface Page {
   pathname: string;
@@ -12,9 +13,10 @@ interface Page {
 
 export const pages = {
   Home: page('', HomePage),
-  Components: page('/components', ComponentsPage),
+  Components: page('/components/dropdown', Components_DropdownPage),
   Controls_TextInput: page('/controls/text-inputs', Controls_TextInputsPage),
   Controls_OptionsSelects: page('/controls/options-selects', Controls_OptionsSelectsPage),
+  Controls_DateSet: page('/controls/date-set', Controls_DateSetPage),
 };
 
 function page(pathname: string, component: Component): Page {

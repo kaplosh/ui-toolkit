@@ -6,11 +6,9 @@ module.exports = {
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
-    sourceType: "module",
-    ecmaVersion: "latest",
-    ecmaFeatures: {
-      "jsx": true
-    }
+    sourceType: 'module',
+    ecmaVersion: 'latest',
+    ecmaFeatures: { jsx: true }
   },
   plugins: ['@typescript-eslint'],
   extends: [
@@ -21,7 +19,7 @@ module.exports = {
   rules: {
     'import/order': [ 'off' ],
     semi: [ 'error', 'always' ],
-    quotes: [ "error", "single" ],
+    quotes: [ 'error', 'single' ],
     'object-curly-spacing': [ 'error', 'always' ],
     'array-bracket-spacing': [ 'error', 'always' ],
     'comma-dangle': [ 'error', 'always-multiline' ],
@@ -31,5 +29,6 @@ module.exports = {
     'no-console': [ 'off' ],
     'no-new': [ 'off' ],
     'vue/multi-word-component-names': [ 'off' ],
+    'keyword-spacing': [ 'error' ],
   },
 };

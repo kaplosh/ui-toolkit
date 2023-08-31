@@ -1,5 +1,4 @@
-export interface OptionItem {
+export interface OptionItem<I=unknown> {
   value: string;
-  object: any;
+  item: I;
 }
-

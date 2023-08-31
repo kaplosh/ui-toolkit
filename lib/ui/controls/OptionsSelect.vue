@@ -1,76 +1,59 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import useFloatingList from '../composables/useFloatingList';
-import { ref } from 'vue';
 
 interface Props {
-  items: ui.OptionItem[];
-  selected: ui.OptionItem[];
-  single?: boolean;
+  options: ui.OptionItem[];
+  modelValue: ui.OptionItem[];
+  multiple: boolean;
+  maxHeight?: number;
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits([ 'change' ]);
-
-const {
-  reference,
-  floating,
-  shown,
-  floatingStyles,
-} = useFloatingList();
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    maxHeight: 150,
+  },
+);
+const emit = defineEmits([ 'update:modelValue' ]);
 
 function isSelected(item: ui.OptionItem): boolean {
-  return props.selected.includes(item);
+  return !!props.modelValue.find(
+    ({ value }) => value === item.value,
+  );
 }
 
 function onClickOption(item: ui.OptionItem): void {
+  let newValue;
 
+  if (isSelected(item)) {
+    newValue = props.modelValue.filter(
+      ({ value }) => value !== item.value,
+    );
+  } else {
+    if (!props.multiple){
+      newValue = [ item ];
+    } else {
+      newValue = [ ...props.modelValue, item ];
+    }
+  }
+
+  emit('update:modelValue', newValue);
 }
 
-function onSelectedChanged(items: ui.OptionItem[]): void {
-  emit('change', items);
-}
 </script>
 
 <template>
-  <div class="d-inline-block">
-    <div
-      ref="reference"
-      style="border: 1px solid green"
-      @click="shown = true"
-    >
-      <div class="d-flex">
-        <div>
-          <slot
-            name="selected"
-            :items="props.selected"
-          />
-        </div>
-        <div>
-          ^^
-        </div>
-      </div>
-      <ul
-        v-if="shown"
-        ref="floating"
-        class="list-group"
-        :style="floatingStyles"
-      >
-        <slot
-          v-for="item of items"
-          :key="item.value"
-          name="item"
-          :item="item"
-          :selected="isSelected(item)"
-          :on-click="() => onClickOption(item)"
-        />
-      </ul>
-    </div>
-  </div>
+  <ul
+    class="list-group overflow-y-scroll"
+    :style="{ maxHeight: `${props.maxHeight}px` }"
+  >
+    <slot
+      v-for="item of options"
+      :key="item.value"
+      name="item"
+      :item="item"
+      :selected="isSelected(item)"
+      :on-click="() => onClickOption(item)"
+    />
+  </ul>
 </template>
-
-<style scoped>
-.list-group-item {
-  cursor: pointer;
-}
-</style>

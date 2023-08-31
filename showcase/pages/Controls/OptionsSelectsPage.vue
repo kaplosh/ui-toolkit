@@ -1,21 +1,29 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
+import ExampleItem from '../../components/ExampleItem.vue';
 import { ref } from 'vue';
 
+
 const records = [
+  { id: '', name: '-' },
   { id: '1', name: 'Hyenk Nguyen' },
-  { id: '2', name: 'Vilem Vilemovic' },
+  { id: '2', name: 'Vilem Vilemovich' },
   { id: '3', name: 'Jarmil Krasomil' },
+  { id: '4', name: 'Lopata Lopatovich' },
+  { id: '6', name: 'Schmetle Petlich' },
+  { id: '7', name: 'Jakakoliv Ex Tveho Výběru' },
 ];
 
-const items: ui.OptionItem[] = records.map(record => ({
+const items: ui.OptionItem<any>[] = records.map(record => ({
   value: record.id,
-  object: record,
+  item: record,
 }));
 
-const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0));
-
+const select1Values = ref([ items[1] ]);
+const select2Values = ref(
+  items.filter(item => Number(item.item.id) % 2 === 0),
+);
 </script>
 
 <template>
@@ -25,31 +33,41 @@ const selectedItems = ref(items.filter(item => Number(item.object.id) % 2 === 0)
       Options Select:
     </h2>
     <PageExamplesSection
-      title="Options Select"
+      title="Options Select Dropdown"
     >
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        static data:
-        <br>
+      <ExampleItem text="single option select">
         <ui.controls.OptionsSelect
-          :items="items"
-          :selected="selectedItems"
-          @change="selectedItems = $event"
+          v-model="select1Values"
+          :options="items"
+          :multiple="false"
         >
-          <template #selected="{ items }">
-            <span v-if="!items.length">-</span>
-            <span v-if="items.length === 1">{{ items[0].object.name }}</span>
-            <span v-if="items.length > 1">[ {{ items.length }} ]</span>
-          </template>
           <template #item="{ item, selected, onClick }">
             <li
               :class="['list-group-item', selected && 'active' ]"
               @click="onClick"
             >
-              {{ item.object.name }}
+              {{ item.item.name }}
             </li>
           </template>
         </ui.controls.OptionsSelect>
-      </div>
+      </ExampleItem>
+
+      <ExampleItem text="multiple option select">
+        <ui.controls.OptionsSelect
+          v-model="select2Values"
+          :options="items"
+          :multiple="true"
+        >
+          <template #item="{ item, selected, onClick }">
+            <li
+              :class="['list-group-item', selected && 'active' ]"
+              @click="onClick"
+            >
+              {{ item.item.name }}
+            </li>
+          </template>
+        </ui.controls.OptionsSelect>
+      </ExampleItem>
     </PageExamplesSection>
   </div>
 </template>
