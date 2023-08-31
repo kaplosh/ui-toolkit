@@ -2,10 +2,15 @@
 // import { ui } from '@ema/ui-toolkit';
 // import { ref } from 'vue';
 // import { recordsDays } from '../mocks.ts';
-// import { recordsMonths } from '../mocks.ts';
 // import { recordsYears } from '../mocks.ts';
+// import { times } from 'lodash';
 //
 //
+// const recordsMonths = times(12, i => {
+//   const id = i + 1;
+//   return { id, name: id  };
+// });
+
 //
 // const months: ui.OptionItem[] = recordsMonths.map(record => ({
 //   value: record.id,
