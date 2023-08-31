@@ -1,7 +1,5 @@
 <script lang="ts" setup="">
-// TODO t131 all the comments in this file
 import { ui } from '@ema/ui-toolkit';
-
 
 interface Props {
   options: ui.OptionItem[];
@@ -16,7 +14,7 @@ const props = withDefaults(
     maxHeight: 150,
   },
 );
-const emit = defineEmits([ 'change' ]); // rename to `input`
+const emit = defineEmits([ 'input' ]);
 
 function isSelected(item: ui.OptionItem): boolean {
   return props.value.includes(item);
@@ -33,7 +31,7 @@ function onClickOption(item: ui.OptionItem): void {
       newArray = [ ...props.value, item ];
     }
   }
-  emit('change', newArray);
+  emit('input', newArray);
 }
 
 </script>

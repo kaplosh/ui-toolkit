@@ -119,7 +119,7 @@ const select4 = ref(selectDefault);
             :options="items"
             :value="select3"
             :multiple="false"
-            @change="select3 = $event"
+            @input="select3 = $event"
           >
             <template #item="{ item, selected, onClick }">
               <li
@@ -138,7 +138,7 @@ const select4 = ref(selectDefault);
             :options="items"
             :value="select4"
             :multiple="true"
-            @change="select4 = $event"
+            @input="select4 = $event"
           >
             <template #item="{ item, selected, onClick }">
               <li

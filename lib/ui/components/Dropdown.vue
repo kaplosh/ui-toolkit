@@ -56,7 +56,7 @@ watch(currentValue, (newValue) =>
         :options="props.options"
         :value="props.value"
         :multiple="true"
-        @change="currentValue = $event"
+        @input="currentValue = $event"
       >
         <template #item="{ item, selected, onClick }">
           <li

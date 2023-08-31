@@ -48,7 +48,7 @@ function check(){
           :items="items"
           :selected="selectedItemsOptionsSelectMultiple"
           :single="false"
-          @change="selectedItemsOptionsSelectMultiple = $event; check()"
+          @input="selectedItemsOptionsSelectMultiple = $event; check()"
         >
           <template #item="{ item, selected, onClick }">
             <li
