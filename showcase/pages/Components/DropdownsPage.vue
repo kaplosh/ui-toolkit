@@ -17,6 +17,9 @@ import ExampleItem from '../../components/ExampleItem.vue';
         text="dropdown list"
       >
         <ui.Dropdown>
+          <template #button>
+            dropdown
+          </template>
           <a
             class="dropdown-item"
             href="#"
@@ -32,9 +35,39 @@ import ExampleItem from '../../components/ExampleItem.vue';
         </ui.Dropdown>
       </ExampleItem>
       <ExampleItem
+        text="small"
+      >
+        <ui.Dropdown small>
+          <template #button>
+            dropdown
+          </template>
+          <div class="dropdown-item">
+            item 1
+          </div>
+          <div class="dropdown-item">
+            item 2
+          </div>
+        </ui.Dropdown>
+      </ExampleItem>
+      <ExampleItem
+        text="only caret"
+      >
+        <ui.Dropdown caret>
+          <div class="dropdown-item">
+            item 1
+          </div>
+          <div class="dropdown-item">
+            item 2
+          </div>
+        </ui.Dropdown>
+      </ExampleItem>
+      <ExampleItem
         text="custom content"
       >
-        <ui.Dropdown>
+        <ui.Dropdown caret>
+          <template #button>
+            dropdown custom
+          </template>
           <ul class="m-2 list-group">
             <li class="list-group-item list-group-item-action">
               text 1

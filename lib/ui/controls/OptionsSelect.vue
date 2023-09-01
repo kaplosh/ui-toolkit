@@ -1,5 +1,6 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
+import { computed } from 'vue';
 
 interface Props {
   options: ui.OptionItem[];
@@ -14,46 +15,78 @@ const props = withDefaults(
     maxHeight: 150,
   },
 );
-const emit = defineEmits([ 'update:modelValue' ]);
 
-function isSelected(item: ui.OptionItem): boolean {
+const emits = defineEmits([ 'update:modelValue' ]);
+
+const rootProps = computed(() => ({
+  class: 'list-group overflow-y-scroll border-top border-bottom',
+  style: { maxHeight: `${props.maxHeight}px` },
+}));
+
+function isSelected(option: ui.OptionItem): boolean {
   return !!props.modelValue.find(
-    ({ value }) => value === item.value,
+    ({ value }) => value === option.value,
   );
 }
 
-function onClickOption(item: ui.OptionItem): void {
+function onToggleOption(option: ui.OptionItem): void {
+  onSetOption(option, !isSelected(option));
+}
+
+function onSetOption(option: ui.OptionItem, selected: boolean): void {
   let newValue;
 
-  if (isSelected(item)) {
-    newValue = props.modelValue.filter(
-      ({ value }) => value !== item.value,
-    );
-  } else {
+  if (selected) {
     if (!props.multiple){
-      newValue = [ item ];
+      newValue = [ option ];
     } else {
-      newValue = [ ...props.modelValue, item ];
+      newValue = [ ...props.modelValue, option ];
     }
+  } else {
+    newValue = props.modelValue.filter(
+      ({ value }) => value !== option.value,
+    );
+
   }
 
-  emit('update:modelValue', newValue);
+  emits('update:modelValue', newValue);
 }
 
 </script>
 
 <template>
   <ul
-    class="list-group overflow-y-scroll"
-    :style="{ maxHeight: `${props.maxHeight}px` }"
+    v-if="$slots.option"
+    v-bind="rootProps"
   >
     <slot
-      v-for="item of options"
-      :key="item.value"
-      name="item"
-      :item="item"
-      :selected="isSelected(item)"
-      :on-click="() => onClickOption(item)"
+      v-for="option of options"
+      :key="option.value"
+      name="option"
+      :option="option"
+      :selected="isSelected(option)"
+      :on-change="(selected: boolean) => onSetOption(option, selected)"
+      :on-toggle="() => onToggleOption(option)"
     />
+  </ul>
+  <ul
+    v-else
+    v-bind="rootProps"
+  >
+    <li
+      v-for="option of options"
+      :key="option.value"
+      :class="['list-group-item list-group-item-action', isSelected(option) && 'active' ]"
+      style="cursor: pointer;"
+      @click="onToggleOption(option)"
+    >
+      <slot
+        v-if="$slots['option-content']"
+        name="option-content"
+        :option="option"
+        :selected="isSelected(option)"
+      />
+      <span v-else>{{ option.item }}</span>
+    </li>
   </ul>
 </template>

@@ -1,18 +1,13 @@
 import { ref, watch } from 'vue';
 import { autoUpdate, flip, shift, size, useFloating } from '@floating-ui/vue';
-import { Placement } from '@floating-ui/core/src/types';
 
-export default function useFloatingList({
-  placement = 'bottom-start',
-}: {
-  placement?: Placement
-}) {
+export default function useFloatingList() {
   const shown = ref(false);
   const reference = ref<null | HTMLElement>(null);
   const floating = ref<null | HTMLUListElement>(null);
 
   const { floatingStyles } = useFloating(reference, floating, {
-    placement,
+    placement: 'bottom-start',
     whileElementsMounted: autoUpdate,
     middleware: [
       flip(),

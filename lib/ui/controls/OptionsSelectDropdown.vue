@@ -1,96 +1,84 @@
-<template>
-  <div>
-    Zakomenteovaný OptionsSelectDropdown
-  </div>
-</template>
-<!--
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 
 
 interface Props {
   options: ui.OptionItem[];
-  value: ui.OptionItem[];
-  multiple?: boolean;
+  modelValue: ui.OptionItem[];
+  multiple: boolean;
+  menuMaxHeight?: number;
+  small?: boolean;
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits([ 'change' ]);
+withDefaults(
+  defineProps<Props>(),
+  {
+    menuMaxHeight: 300,
+  },
+);
 
+const emits = defineEmits([ 'update:modelValue' ]);
 
-const {
-  reference,
-  floating,
-  shown,
-  floatingStyles,
-} = ui.useFloatingList('bottom-start');
-
-function isSelected(item: ui.OptionItem): boolean {
-  return !!props.value.find(({ value }) => value === item.value );
+function onChange (newValue: ui.OptionItem[]) {
+  emits('update:modelValue', newValue);
 }
 
-function onClickOption(item: ui.OptionItem): void {
-  let newArray;
-  console.log('triggers');
-  if (isSelected(item)) {
-    newArray = props.value.filter(({ value }) => value !== item.value );
-  } else {
-    if (props.multiple){
-      newArray = [ ...props.value, item ];
-    } else {
-      newArray = [ item ];
-    }
-  }
-  emit('change', newArray);
-}
 </script>
 
 <template>
-  <div class="d-inline-block">
-    <div
-      ref="reference"
-      style="border: 1px solid green"
-      @click="shown = true"
+  <ui.Dropdown
+    caret
+    :small="small"
+    :prepend-class="[
+      'border border-end-0 align-items-center overflow-hidden px-2',
+    ]"
+    custom-menu
+  >
+    <template #prepend>
+      <slot
+        v-if="$slots.prepend"
+        name="prepend"
+      />
+      <span
+        v-else-if="!multiple"
+        class="text-truncate"
+      >
+        {{ modelValue[0]?.item }}
+
+      </span>
+      <span
+        v-else-if="modelValue.length"
+        class="text-truncate"
+      >
+        [{{ modelValue.length }}]
+        {{ modelValue.map(option => option.item).join(', ') }}
+      </span>
+    </template>
+    <ui.controls.OptionsSelect
+      :model-value="modelValue"
+      :options="options"
+      :multiple="multiple"
+      :max-height="menuMaxHeight"
+      @update:modelValue="onChange"
     >
-      <div class="d-flex">
-        <div>
-          <slot
-            name="selected"
-            :items="props.value"
-          />
-        </div>
-        <div />
-      </div>
-      <ul
-        v-if="shown"
-        ref="floating"
-        class="list-group"
-        :style="floatingStyles"
+      <template
+        v-if="$slots.option"
+        #option="slotProps"
       >
         <slot
-          v-for="item of options"
-          :key="item.value"
-          name="item"
-          :item="item"
-          :selected="isSelected(item)"
-          :on-click="() => onClickOption(item)"
-          class="list-group-item"
+          name="option"
+          v-bind="slotProps"
         />
-      </ul>
-    </div>
-  </div>
+      </template>
+      <template
+        v-if="$slots['option-content']"
+        #option-content="slotProps"
+      >
+        <slot
+          name="option-content"
+          v-bind="slotProps"
+        />
+      </template>
+    </ui.controls.OptionsSelect>
+  </ui.Dropdown>
 </template>
-
-<style scoped>
-.list-group{
-  max-height: 100px;
-  overflow-y: scroll;
-}
-.list-group-item {
-  cursor: pointer;
-}
-</style>
--->
-<script setup>
-import OptionsSelectDropdown from '@ema/ui-toolkit/ui/components/OptionsSelectDropdown.vue';
-</script>
