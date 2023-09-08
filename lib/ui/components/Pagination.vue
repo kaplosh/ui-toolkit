@@ -1,10 +1,13 @@
 <script lang="ts" setup="">
 import { computed } from 'vue';
 defineEmits([ 'select' ]);
-const totalPages = [ 1, 2, 3 ];
+interface Props {
+  totalPages: number,
+}
+const props = defineProps<Props>();
 
 const navigationElements = computed(() => {
-  return new Array(totalPages.length);
+  return new Array(props.totalPages);
 
 });
 </script>
