@@ -4,6 +4,7 @@ import PageExamplesSection from '../../components/PageExamplesSection.vue';
 import ExampleItem from '../../components/ExampleItem.vue';
 import { ref } from 'vue';
 
+
 const allOptions = [
   { value: '1', item: 'Hyenk Nguyen' },
   { value: '2', item: 'Vilem Vilemovich' },
@@ -22,6 +23,10 @@ const dropdown2Values = ref(
   allOptions.filter(item => Number(item.value) % 3 === 0),
 );
 
+const record = {
+  id: '5',
+  caption: 'five',
+};
 </script>
 
 <template>
@@ -95,6 +100,16 @@ const dropdown2Values = ref(
           v-model="dropdown2Values"
           :options="allOptions"
           multiple
+        />
+      </exampleitem>
+    </PageExamplesSection>
+    <PageExamplesSection
+      title="B-Records Select"
+    >
+      <ExampleItem text="">
+        <ui.BRecordLink
+          :record="record"
+          show-id
         />
       </exampleitem>
     </PageExamplesSection>
