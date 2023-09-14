@@ -59,6 +59,7 @@ function onSetOption(option: ui.OptionItem, selected: boolean): void {
     v-if="$slots.option"
     v-bind="rootProps"
   >
+    <slot name="input"></slot>
     <slot
       v-for="option of options"
       :key="option.value"
@@ -73,6 +74,7 @@ function onSetOption(option: ui.OptionItem, selected: boolean): void {
     v-else
     v-bind="rootProps"
   >
+    <slot name="input" class="list-group-item"></slot>
     <li
       v-for="option of options"
       :key="option.value"

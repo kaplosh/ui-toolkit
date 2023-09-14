@@ -1,6 +1,7 @@
 <script lang="ts" setup="">
+import { ui } from '@ema/ui-toolkit';
 interface Props {
-  record?: BRecord;
+  record: ui.OptionItem;
   entity?: string;
   baseUrl?: string;
   showId?: boolean;
@@ -28,7 +29,7 @@ function fullPath () {
     :href="path"
     class="icon-link"
   >
-    <b-icon icon="card-heading" />&nbsp;{{ record.id }}
+    &nbsp;{{ record.id }}
   </a>
   <div>
     <a
@@ -38,7 +39,7 @@ function fullPath () {
       class="icon-link"
       @click.stop
     >
-      <b-icon icon="card-heading" />&nbsp;{{ record.id }} {{ record.caption }}
+     {{ record.value }} {{ record.item }}
     </a>
     <a
       v-else
@@ -47,7 +48,7 @@ function fullPath () {
       class="icon-link"
       @click.stop
     >
-      <b-icon icon="card-heading" />&nbsp;{{ record.caption }}
+      &nbsp;{{ record.caption }}
     </a>
   </div>
 </template>

@@ -23,10 +23,10 @@ const dropdown2Values = ref(
   allOptions.filter(item => Number(item.value) % 3 === 0),
 );
 
-const record = {
+const record = [ {
   id: '5',
   caption: 'five',
-};
+} ];
 </script>
 
 <template>
@@ -104,12 +104,18 @@ const record = {
       </exampleitem>
     </PageExamplesSection>
     <PageExamplesSection
-      title="B-Records Select"
+      title="B-Sections"
     >
-      <ExampleItem text="">
+      <ExampleItem text="B-Records Link">
         <ui.BRecordLink
           :record="record"
           show-id
+        />
+      </exampleitem>
+      <ExampleItem text="B-Records Select">
+        <ui.controls.BRecordsSelect
+          :options="allOptions"
+          :model-value="select1Values"
         />
       </exampleitem>
     </PageExamplesSection>
