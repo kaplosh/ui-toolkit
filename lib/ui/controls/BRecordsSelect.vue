@@ -22,6 +22,11 @@ const allOptions = [
 ];
 
 const select1Values = ref([ allOptions[1] ]);
+const emits = defineEmits([ 'update:modelValue' ]);
+
+function onChange (newValue: ui.OptionItem[]) {
+  emits('update:modelValue', newValue);
+}
 
 
 </script>
@@ -31,8 +36,9 @@ const select1Values = ref([ allOptions[1] ]);
     <ui.controls.OptionsSelectDropdown
       v-model="select1Values"
       :options="allOptions"
+      :on-change="onChange"
       bLink
-      multiple
+      :multiple="multiple"
     />
   </div>
 </template>

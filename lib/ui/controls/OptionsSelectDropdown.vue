@@ -2,7 +2,6 @@
 import { ui } from '@ema/ui-toolkit';
 import BRecordLink from '../components/BRecordLink.vue';
 import { ref } from 'vue';
-import {OptionItem} from "../types";
 
 
 interface Props {
@@ -20,7 +19,7 @@ withDefaults(
   defineProps<Props>(),
   {
     menuMaxHeight: 300,
-    rowMaxHeight: 40,
+    rowMaxHeight: 60,
   },
 );
 
@@ -65,7 +64,6 @@ function search(objects, searchTerm) {
       >
         <span
           v-if="bLink"
-          :style="rowMaxHeight"
         >
           <BRecordLink
             :record="modelValue[0]"
@@ -108,6 +106,8 @@ function search(objects, searchTerm) {
       >
         <input
           v-model="query"
+          placeholder="Search for options"
+          class="list-group-item border-3"
           @input="search(options,query)"
         >
       </template>
