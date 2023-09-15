@@ -31,11 +31,11 @@ const matchingItems = ref(props.options);
 function onChange (newValue: ui.OptionItem[]) {
   emits('update:modelValue', newValue);
 }
-function search(objects, searchTerm) {
-  const searchTermLower = searchTerm.toLowerCase();
+function search(list, query) {
+  const queryLowered = query.toLowerCase();
 
-  matchingItems.value = objects.filter(obj =>
-    obj.item.toLowerCase().includes(searchTermLower),
+  matchingItems.value = list.filter(element =>
+    element.item.toLowerCase().includes(queryLowered),
   );
 
   return matchingItems;
@@ -95,7 +95,7 @@ function search(objects, searchTerm) {
     </template>
     <ui.controls.OptionsSelect
       :model-value="modelValue"
-      :options="matchingItems||options"
+      :options="matchingItems || options"
       :multiple="multiple"
       :max-height="menuMaxHeight"
       @update:modelValue="onChange"
