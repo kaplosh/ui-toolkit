@@ -27,6 +27,7 @@ withDefaults(
 const emits = defineEmits([ 'update:modelValue' ]);
 const query = ref('');
 const matchingItems = ref(props.options);
+const updatedModelValue = ref(props.modelValue);
 
 function onChange (newValue: ui.OptionItem[]) {
   emits('update:modelValue', newValue);
@@ -39,6 +40,14 @@ function search(list, query) {
   );
 
   return matchingItems;
+}
+
+function onRemove (list: ui.OptionItem[], optionId) {
+  console.log(list, optionId);
+  updatedModelValue.value.filter(item => item.value === optionId);
+    onChange(list);
+
+
 
 }
 
@@ -49,7 +58,7 @@ function search(list, query) {
     caret
     :small="small"
     :prepend-class="[
-      'border border-end-0 align-items-center overflow-hidden px-2',
+      'border border-end-0 align-items-center overflow-auto px-2',
     ]"
     custom-menu
   >
@@ -64,6 +73,7 @@ function search(list, query) {
       >
         <span
           v-if="bLink"
+          class=""
         >
           <BRecordLink
             :record="modelValue[0]"
@@ -83,11 +93,16 @@ function search(list, query) {
         >
           <span
             v-for="option in modelValue"
+            class="d-flex d-inline"
           >
             <BRecordLink
               :record="option"
               show-id
-            /></span>
+            /><p
+              class="delete-caption"
+              @click="onRemove(updatedModelValue, option.value)"
+            >delete</p></span>
+
         </span>
         <span v-else>[{{ modelValue.length }}]
           {{ modelValue.map(option => option.item).join(', ') }}</span>
@@ -135,3 +150,11 @@ function search(list, query) {
     </ui.controls.OptionsSelect>
   </ui.Dropdown>
 </template>
+
+<style scoped>
+.delete-caption {
+  font-size: 10px;
+  font-family: monospace;
+}
+
+</style>

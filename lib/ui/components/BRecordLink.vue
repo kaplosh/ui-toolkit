@@ -29,7 +29,7 @@ function fullPath () {
     :href="path"
     class="icon-link"
   >
-    &nbsp;{{ record.id }}
+    &nbsp;{{ record.value }}
   </a>
   <div>
     <a
@@ -48,7 +48,7 @@ function fullPath () {
       class="icon-link"
       @click.stop
     >
-      &nbsp;{{ record.caption }}
+      &nbsp;{{ record.item }}
     </a>
   </div>
 </template>

@@ -21,11 +21,11 @@ const {
 <template>
   <div
     ref="reference"
-    class="d-flex"
+    class="d-flex overflow-auto"
   >
     <div
       v-if="$slots.prepend"
-      :class="['d-flex flex-fill', prependClass]"
+      :class="['d-flex flex-fill custom-row', prependClass]"
     >
       <slot name="prepend" />
     </div>
@@ -62,5 +62,8 @@ const {
 <style scoped>
 .caret:not(:first-child) {
   margin-left: 8px;
+}
+.custom-row {
+  height: 40px;
 }
 </style>
