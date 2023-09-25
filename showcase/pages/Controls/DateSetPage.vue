@@ -12,7 +12,10 @@ import PageExamplesSection from '../../components/PageExamplesSection.vue';
     <PageExamplesSection
       title=""
     >
-      <!--      <ui.controls.DateSet />-->
+      <ui.controls.DateSet
+      >
+
+      </ui.controls.DateSet>
     </PageExamplesSection>
   </div>
 </template>
