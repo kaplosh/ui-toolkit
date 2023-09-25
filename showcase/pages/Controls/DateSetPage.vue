@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
+import ExampleItem from '../../components/ExampleItem.vue';
+import { ref } from 'vue';
+
+const datePicked = ref(new Date());
 </script>
 
 <template>
@@ -12,10 +16,15 @@ import PageExamplesSection from '../../components/PageExamplesSection.vue';
     <PageExamplesSection
       title=""
     >
-      <ui.controls.DateSet
-      >
-
-      </ui.controls.DateSet>
+      <ExampleItem text="Default date set">
+        <ui.controls.DateSet />
+      </exampleitem>
+      <ExampleItem text="Dropdown based date set">
+        <ui.controls.DateSetDropdown />
+      </ExampleItem>
+      <ExampleItem text="Library based date picker">
+        <ui.controls.DatePick v-model="datePicked" />
+      </ExampleItem>
     </PageExamplesSection>
   </div>
 </template>

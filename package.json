@@ -21,7 +21,8 @@
     "jsdom": "^21.1.1",
     "lodash": "^4.17.21",
     "typescript": "^5.0.2",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue3-datepicker": "^0.4.0"
   },
   "devDependencies": {
     "@testing-library/vue": "^7.0.0",
