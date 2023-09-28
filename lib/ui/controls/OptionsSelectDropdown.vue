@@ -1,6 +1,5 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
-import BRecordLink from '../components/BRecordLink.vue';
 import { ref } from 'vue';
 
 
@@ -8,7 +7,6 @@ interface Props {
   options: ui.OptionItem[];
   modelValue: ui.OptionItem[];
   multiple: boolean;
-  bLink?: boolean;
   menuMaxHeight?: number;
   rowMaxHeight?: number;
   small?: boolean;
@@ -25,30 +23,10 @@ withDefaults(
 
 
 const emits = defineEmits([ 'update:modelValue' ]);
-const query = ref('');
-const matchingItems = ref(props.options);
-const updatedModelValue = ref(props.modelValue);
 
 function onChange (newValue: ui.OptionItem[]) {
+  console.log(newValue);
   emits('update:modelValue', newValue);
-}
-function search(list, query) {
-  const queryLowered = query.toLowerCase();
-
-  matchingItems.value = list.filter(element =>
-    element.item.toLowerCase().includes(queryLowered),
-  );
-
-  return matchingItems;
-}
-
-function onRemove (list: ui.OptionItem[], optionId) {
-  console.log(list, optionId);
-  updatedModelValue.value.filter(item => item.value === optionId);
-    onChange(list);
-
-
-
 }
 
 </script>
@@ -68,41 +46,26 @@ function onRemove (list: ui.OptionItem[], optionId) {
         name="prepend"
       />
       <span
-        v-else-if="!multiple"
+        v-if="!multiple"
         class="text-truncate"
       >
         <span
-          v-if="bLink"
-          class=""
+          v-if="$slots.bRecordSingle"
         >
-          <BRecordLink
-            :record="modelValue[0]"
-            show-id
-          /></span>
+          <slot name="bRecordSingle" />
+        </span>
         <span v-else>
           {{ modelValue[0]?.item }}
         </span>
-
       </span>
       <span
         v-else-if="modelValue.length"
         class="text-truncate"
       >
         <span
-          v-if="bLink"
+          v-if="$slots.brecordMultiple"
         >
-          <span
-            v-for="option in modelValue"
-            class="d-flex d-inline"
-          >
-            <BRecordLink
-              :record="option"
-              show-id
-            /><button
-              class="delete-caption"
-              @click="onRemove(updatedModelValue, option.value)"
-            >🗙</button></span>
-
+          <slot name="brecordMultiple" />
         </span>
         <span v-else>[{{ modelValue.length }}]
           {{ modelValue.map(option => option.item).join(', ') }}</span>
@@ -110,29 +73,18 @@ function onRemove (list: ui.OptionItem[], optionId) {
     </template>
     <ui.controls.OptionsSelect
       :model-value="modelValue"
-      :options="matchingItems || options"
+      :options="options"
       :multiple="multiple"
       :max-height="menuMaxHeight"
       @update:modelValue="onChange"
     >
-      <template
-        v-if="bLink"
-        #input
-      >
-        <input
-          v-model="query"
-          placeholder="Search for options"
-          class="list-group-item border-3"
-          @input="search(options,query)"
-        >
+      <template #input>
+        <slot name="input" />
       </template>
       <template
         v-if="$slots.option"
         #option="slotProps"
       >
-        <span v-if="bLink">
-          <input>
-        </span>
         <slot
           name="option"
           v-bind="slotProps"

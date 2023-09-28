@@ -1,6 +1,8 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref } from 'vue';
+import OptionsSelectDropdown from '../components/OptionsSelectDropdown.vue';
+import BRecordLink from '../components/BRecordLink.vue';
 
 interface Props {
   options: ui.OptionItem[];
@@ -12,25 +14,92 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const selectValues = ref( props.modelValue );
 const emits = defineEmits([ 'update:modelValue' ]);
 
+const updatedModelValue = ref(props.modelValue);
+const matchingItems = ref(props.options);
+const query = ref('');
+
+
 function onChange (newValue) {
+  updatedModelValue.value = newValue;
   emits('update:modelValue', newValue);
 }
 
+function onRemove (list: ui.OptionItem[], optionId) {
+  console.log(list, optionId, 'Delete log');
+  updatedModelValue.value = list.filter(item => item.value === optionId);
+  onChange(updatedModelValue.value);
+}
+
+function onSearch(list, query) {
+  const queryLowered = query.toLowerCase();
+  matchingItems.value = list.filter(element =>
+    element.item.toLowerCase().includes(queryLowered),
+  );
+  return matchingItems;
+
+}
 
 </script>
 
 <template>
   <div>
     <ui.controls.OptionsSelectDropdown
-      v-model="selectValues"
-      :options="options"
-      :on-change="onChange(selectValues)"
-      b-link
+      v-model="updatedModelValue"
+      :options="matchingItems || options"
       :multiple="multiple"
-    />
+      @update:modelValue="onChange"
+    >
+      <template #bRecordSingle>
+        <div
+          v-for="option in updatedModelValue"
+          class="d-flex d-inline"
+        >
+          <BRecordLink
+            :record="option"
+            show-id
+          /><button
+            class="delete-caption"
+            @click="onRemove(updatedModelValue, option.value)"
+          >
+            🗙
+          </button>
+        </div>
+      </template>
+      <template #brecordMultiple>
+        <div
+          v-for="option in updatedModelValue"
+          class="d-flex d-inline"
+        >
+          <BRecordLink
+            :record="option"
+            show-id
+          /><button
+            class="delete-caption"
+            @click="onRemove(updatedModelValue, option.value)"
+          >
+            🗙
+          </button>
+        </div>
+      </template>
+      <template #input>
+        <input
+          v-model="query"
+          placeholder="Search for options"
+          class="list-group-item border-3"
+          @input="onSearch(options,query)"
+        >
+      </template>
+    </ui.controls.OptionsSelectDropdown>
   </div>
 </template>
 
+<style scoped>
+.delete-caption {
+  font-size: 15px;
+  font-family: monospace;
+  color: darkgray;
+  margin-left: 2px;
+}
+</style>
