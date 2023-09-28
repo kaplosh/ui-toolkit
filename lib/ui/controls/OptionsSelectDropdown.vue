@@ -101,13 +101,3 @@ function onChange (newValue: ui.OptionItem[]) {
     </ui.controls.OptionsSelect>
   </ui.Dropdown>
 </template>
-
-<style scoped>
-.delete-caption {
-  font-size: 15px;
-  font-family: monospace;
-  color: darkgray;
-  margin-left: 2px;
-}
-
-</style>
