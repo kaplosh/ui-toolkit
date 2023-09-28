@@ -25,7 +25,6 @@ withDefaults(
 const emits = defineEmits([ 'update:modelValue' ]);
 
 function onChange (newValue: ui.OptionItem[]) {
-  console.log(newValue);
   emits('update:modelValue', newValue);
 }
 

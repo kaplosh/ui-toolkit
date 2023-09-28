@@ -27,8 +27,7 @@ function onChange (newValue) {
 }
 
 function onRemove (list: ui.OptionItem[], optionId) {
-  console.log(list, optionId, 'Delete log');
-  updatedModelValue.value = list.filter(item => item.value === optionId);
+  updatedModelValue.value = list.filter(item => item.value !== optionId);
   onChange(updatedModelValue.value);
 }
 
@@ -70,6 +69,7 @@ function onSearch(list, query) {
       <template #brecordMultiple>
         <div
           v-for="option in updatedModelValue"
+          :key="option.value"
           class="d-flex d-inline"
         >
           <BRecordLink
