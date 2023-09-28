@@ -98,10 +98,10 @@ function onRemove (list: ui.OptionItem[], optionId) {
             <BRecordLink
               :record="option"
               show-id
-            /><p
+            /><button
               class="delete-caption"
               @click="onRemove(updatedModelValue, option.value)"
-            >delete</p></span>
+            >🗙</button></span>
 
         </span>
         <span v-else>[{{ modelValue.length }}]
@@ -153,8 +153,10 @@ function onRemove (list: ui.OptionItem[], optionId) {
 
 <style scoped>
 .delete-caption {
-  font-size: 10px;
+  font-size: 15px;
   font-family: monospace;
+  color: darkgray;
+  margin-left: 2px;
 }
 
 </style>
