@@ -2,9 +2,11 @@
   import { ui } from '@ema/ui-toolkit';
   import ExampleItem from '../../components/ExampleItem.vue';
 
-  const elements = 40;
-  const elementsPerPage = 10;
-  const totalPages = elements/elementsPerPage;
+ const page = 1;
+
+/*
+ const pagesCount =
+*/
 </script>
 
 <template>
@@ -17,7 +19,9 @@
       <div class="col-md-6 col-lg-4 col-xl-3">
         <ExampleItem>
           <ui.Pagination
-            :total-pages="totalPages"
+            :page="page"
+            records-total="5000"
+            per-page="20"
           />
         </ExampleItem>
       </div>
