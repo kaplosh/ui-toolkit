@@ -4,7 +4,6 @@ import HomePage from './HomePage.vue';
 import Components_DropdownPage from './Components/DropdownsPage.vue';
 import Controls_TextInputsPage from './Controls/TextInputsPage.vue';
 import Controls_OptionsSelectsPage from './Controls/OptionsSelectsPage.vue';
-import Controls_DateSetPage from './Controls/DateSetPage.vue';
 import Controls_PaginationPage from './Controls/PaginationPage.vue';
 
 interface Page {
@@ -17,7 +16,6 @@ export const pages = {
   Components: page('/components/dropdown', Components_DropdownPage),
   Controls_TextInput: page('/controls/text-inputs', Controls_TextInputsPage),
   Controls_OptionsSelects: page('/controls/options-selects', Controls_OptionsSelectsPage),
-  Controls_DateSet: page('/controls/date-set', Controls_DateSetPage),
   Controls_PaginationPage: page('/controls/pagination', Controls_PaginationPage),
 };
 
