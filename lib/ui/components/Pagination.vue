@@ -12,20 +12,15 @@ const props = defineProps<Props>();
 const currentPage = ref(props.page);
 const firstPage = ref(props.recordsTotal[0]);
 const totalPages =  ref(props.recordsTotal/props.perPage)||ref(props.pagesCount);
-const lastPage = ref(totalPages.value);
+
 
 function onPageChange(value) {
   if (!isNaN(currentPage.value)) {
   currentPage.value = currentPage.value + value;
     if (currentPage.value < 1) currentPage.value = 1;
-    if (currentPage.value > lastPage.value) currentPage.value = lastPage.value;
+    if (currentPage.value > totalPages.value) currentPage.value = totalPages.value;
   }
 }
-
-/*const navigationElements = computed(() => {
-  return new Array(props.totalPages);
-
-});*/
 </script>
 
 <template>
@@ -67,14 +62,14 @@ function onPageChange(value) {
       </button>
       <button
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === lastPage"
+        :disabled="currentPage === totalPages"
         @click="onPageChange(1)"
       >
         Next
       </button>
       <button
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage > lastPage - 3"
+        :disabled="currentPage > totalPages - 3"
         @click="onPageChange(+3)"
       >
         +3
@@ -82,13 +77,13 @@ function onPageChange(value) {
       <button
         class="btn btn-outline-primary rounded-1"
         @click="onPageChange(+10)"
-        :disabled="currentPage > lastPage - 10"
+        :disabled="currentPage > totalPages - 10"
       >
         +10
       </button>
       <button
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === lastPage"
+        :disabled="currentPage === totalPages"
         @click="onPageChange(totalPages-currentPage)"
       >
         Last
