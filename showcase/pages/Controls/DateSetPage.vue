@@ -19,9 +19,6 @@ const datePicked = ref(new Date());
       <ExampleItem text="Default date set">
         <ui.controls.DateSet />
       </exampleitem>
-      <ExampleItem text="Dropdown based date set">
-        <ui.controls.DateSetDropdown />
-      </ExampleItem>
       <ExampleItem text="Library based date picker">
         <ui.controls.DatePick v-model="datePicked" />
       </ExampleItem>
