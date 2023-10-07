@@ -44,30 +44,19 @@ function onChange (newValue: ui.OptionItem[]) {
         v-if="$slots.prepend"
         name="prepend"
       />
-      <span
-        v-if="!multiple"
-        class="text-truncate"
-      >
-        <span
-          v-if="$slots.bRecordSingle"
-        >
-          <slot name="bRecordSingle" />
+      <span class="text-truncate">
+        <span v-if="$slots.content">
+          <slot name="content" />
         </span>
         <span v-else>
-          {{ modelValue[0]?.item }}
+          <template v-if="!multiple">
+            {{ modelValue[0]?.item }}
+          </template>
+          <template v-else-if="modelValue.length">
+            [{{ modelValue.length }}]
+            {{ modelValue.map(option => option.item).join(', ') }}
+          </template>
         </span>
-      </span>
-      <span
-        v-else-if="modelValue.length"
-        class="text-truncate"
-      >
-        <span
-          v-if="$slots.brecordMultiple"
-        >
-          <slot name="brecordMultiple" />
-        </span>
-        <span v-else>[{{ modelValue.length }}]
-          {{ modelValue.map(option => option.item).join(', ') }}</span>
       </span>
     </template>
     <ui.controls.OptionsSelect

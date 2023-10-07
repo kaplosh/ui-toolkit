@@ -39,7 +39,7 @@ function fullPath () {
       class="icon-link"
       @click.stop
     >
-     {{ record.value }} {{ record.item }}
+      {{ record.value }} {{ record.item }}
     </a>
     <a
       v-else

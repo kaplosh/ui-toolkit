@@ -50,37 +50,39 @@ function onSearch(list, query) {
       :multiple="multiple"
       @update:modelValue="onChange"
     >
-      <template #bRecordSingle>
-        <div
-          v-for="option in updatedModelValue"
-          class="d-flex d-inline"
-        >
-          <BRecordLink
-            :record="option"
-            show-id
-          /><button
-            class="delete-caption"
-            @click="onRemove(updatedModelValue, option.value)"
+      <template #content>
+        <div v-if="!multiple">
+          <div
+            v-for="option in updatedModelValue"
+            :key="option.value"
+            class="d-flex d-inline"
           >
-            🗙
-          </button>
+            <BRecordLink
+              :record="option"
+              show-id
+            /><p
+              @click="onRemove(updatedModelValue, option.value)"
+            >
+              <i class="bi bi-x-lg delete-caption" />
+            </p>
+          </div>
         </div>
-      </template>
-      <template #brecordMultiple>
-        <div
-          v-for="option in updatedModelValue"
-          :key="option.value"
-          class="d-flex d-inline"
-        >
-          <BRecordLink
-            :record="option"
-            show-id
-          /><button
-            class="delete-caption"
-            @click="onRemove(updatedModelValue, option.value)"
+        <div v-else>
+          <div
+            v-for="option in updatedModelValue"
+            :key="option.value"
+            class="d-flex d-inline"
           >
-            🗙
-          </button>
+            <BRecordLink
+              :record="option"
+              show-id
+            />
+            <p
+              @click="onRemove(updatedModelValue, option.value)"
+            >
+              <i class="bi bi-x-lg delete-caption" />
+            </p>
+          </div>
         </div>
       </template>
       <template #input>
@@ -99,7 +101,7 @@ function onSearch(list, query) {
 .delete-caption {
   font-size: 15px;
   font-family: monospace;
-  color: darkgray;
-  margin-left: 2px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 </style>
