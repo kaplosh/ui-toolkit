@@ -3,10 +3,11 @@ import { ui } from '@ema/ui-toolkit';
 import { ref } from 'vue';
 import OptionsSelectDropdown from '../components/OptionsSelectDropdown.vue';
 import BRecordLink from '../components/BRecordLink.vue';
+import {Record} from "../types";
 
 interface Props {
-  options: ui.OptionItem[];
-  modelValue: ui.OptionItem[];
+  options: ui.OptionItem<ui.Record>[];
+  modelValue: ui.OptionItem<ui.Record>[];
   multiple?: boolean;
   menuMaxHeight?: number;
   small?: boolean;
@@ -14,7 +15,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const emits = defineEmits([ 'update:modelValue' ]);
+const emits = defineEmits([ 'update:modelValue', 'search' ]);
 
 const updatedModelValue = ref(props.modelValue);
 const matchingItems = ref(props.options);
@@ -31,15 +32,9 @@ function onRemove (list: ui.OptionItem[], optionId) {
   onChange(updatedModelValue.value);
 }
 
-function onSearch(list, query) {
-  const queryLowered = query.toLowerCase();
-  matchingItems.value = list.filter(element =>
-    element.item.toLowerCase().includes(queryLowered),
-  );
-  return matchingItems;
-
+function onSearch (event) {
+  emits('search', event.target.value);
 }
-
 </script>
 
 <template>
@@ -90,7 +85,7 @@ function onSearch(list, query) {
           v-model="query"
           placeholder="Search for options"
           class="list-group-item border-3"
-          @input="onSearch(options,query)"
+          @input="onSearch"
         >
       </template>
     </ui.controls.OptionsSelectDropdown>

@@ -14,6 +14,11 @@ const allOptions = [
   { value: '6', item: 'Jakakoliv Ex Tveho Výběru' },
 ];
 
+const allRecords: ui.Record[] = [
+  { id: '1', caption: 'Jednička' },
+  { id: '2', caption: 'Dvojka' },
+];
+
 const select1Values = ref([ allOptions[1] ]);
 const select2Values = ref(
   allOptions.filter(item => Number(item.value) % 2 === 0),
@@ -22,6 +27,8 @@ const dropdown1Values = ref([ allOptions[2] ]);
 const dropdown2Values = ref(
   allOptions.filter(item => Number(item.value) % 3 === 0),
 );
+const select1Records = ref([ allRecords[1] ]);
+const select2Records = ref([ allRecords[1] ]);
 </script>
 
 <template>
@@ -103,14 +110,14 @@ const dropdown2Values = ref(
     >
       <ExampleItem text="B-Records Select">
         <ui.controls.BRecordsSelect
-          :options="allOptions"
-          :model-value="select1Values"
+          :options="allRecords"
+          :model-value="select1Records"
         />
       </exampleitem>
       <ExampleItem text="B-Records Select Multiple">
         <ui.controls.BRecordsSelect
-          :options="allOptions"
-          :model-value="select1Values"
+          :options="allRecords"
+          :model-value="select2Records"
           multiple
         />
       </exampleitem>

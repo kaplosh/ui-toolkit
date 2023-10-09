@@ -66,7 +66,7 @@ function onChange (newValue: ui.OptionItem[]) {
       :max-height="menuMaxHeight"
       @update:modelValue="onChange"
     >
-      <template #input>
+      <template v-if="$slots['input']" #input>
         <slot name="input" />
       </template>
       <template
