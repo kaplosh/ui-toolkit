@@ -5,6 +5,11 @@ import ExampleItem from '../../components/ExampleItem.vue';
 import { ref } from 'vue';
 
 const datePicked = ref(new Date());
+const newDate = ref('');
+
+function onInput(date) {
+  newDate.value = date;
+}
 </script>
 
 <template>
@@ -17,7 +22,10 @@ const datePicked = ref(new Date());
       title=""
     >
       <ExampleItem text="Default date set">
-        <ui.controls.DateSet />
+        <ui.controls.DateInput
+          @on-change="onInput"
+        />
+        {{ newDate }}
       </exampleitem>
       <ExampleItem text="Library based date picker">
         <ui.controls.DatePick v-model="datePicked" />
