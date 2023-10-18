@@ -3,6 +3,8 @@
   import ExampleItem from '../../components/ExampleItem.vue';
 
  const page = 1;
+ const records = [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1  ];
+ const perPage = 5;
 
 /*
  const pagesCount =
@@ -20,8 +22,9 @@
         <ExampleItem>
           <ui.Pagination
             :page="page"
-            records-total="5000"
-            per-page="20"
+            :records-total="records"
+            :per-page="perPage"
+            :records="records"
           />
         </ExampleItem>
       </div>

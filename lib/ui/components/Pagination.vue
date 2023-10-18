@@ -4,22 +4,28 @@ defineEmits([ 'select' ]);
 interface Props {
   page: number,
   perPage: number,
-  pagesCount: number,
+  records: any,
   recordsTotal: number,
 }
 const props = defineProps<Props>();
 
 const currentPage = ref(props.page);
-const firstPage = ref(props.recordsTotal[0]);
-const totalPages =  ref(props.recordsTotal/props.perPage)||ref(props.pagesCount);
-
+const lastPage = ref(props.records.length);
+const totalPages =  ref(props.recordsTotal/props.perPage);
 
 function onPageChange(value) {
   if (!isNaN(currentPage.value)) {
   currentPage.value = currentPage.value + value;
-    if (currentPage.value < 1) currentPage.value = 1;
-    if (currentPage.value > totalPages.value) currentPage.value = totalPages.value;
+    if (currentPage.value < 1) {
+      currentPage.value = 1;
+    }
+    if (currentPage.value > lastPage.value) {
+      currentPage.value = lastPage.value;
+    }
   }
+}
+function onLastPage() {
+  currentPage.value = lastPage.value;
 }
 </script>
 
@@ -27,66 +33,66 @@ function onPageChange(value) {
   <div>
     <ul class="pagination">
       <button
+        v-if="currentPage !== 1"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === 1"
-        @click="onPageChange(-totalPages+1)"
+        @click="onPageChange(-currentPage-1)"
       >
-        First
+        First page
       </button>
       <button
+        v-if="currentPage> 10"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage < 10"
         @click="onPageChange(-10)"
       >
-        -10
+        {{ currentPage - 10 }}
       </button>
       <button
+        v-if="currentPage > 3"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage < 3"
         @click="onPageChange(-3)"
       >
-        -3
+        {{ currentPage -3 }}
       </button>
       <button
+        v-if="currentPage !== 1"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === firstPage"
         @click="onPageChange(-1)"
       >
-        Previous
+        {{ currentPage - 1 }}
       </button>
       <button
         class="btn btn-outline-primary rounded-1"
         disabled
       >
-        {{ currentPage }}
+        {{ "This is" + currentPage }}
       </button>
       <button
+        v-if="currentPage < lastPage - 1"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === totalPages"
         @click="onPageChange(1)"
       >
-        Next
+        {{ currentPage + 1 }}
       </button>
       <button
+        v-if="currentPage < lastPage - 3"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage > totalPages - 3"
         @click="onPageChange(+3)"
       >
-        +3
+        {{ currentPage +3 }}
       </button>
       <button
+        v-if="currentPage < lastPage - 10 "
         class="btn btn-outline-primary rounded-1"
         @click="onPageChange(+10)"
-        :disabled="currentPage > totalPages - 10"
       >
         +10
       </button>
       <button
+        v-if="currentPage !== lastPage"
         class="btn btn-outline-primary rounded-1"
-        :disabled="currentPage === totalPages"
-        @click="onPageChange(totalPages-currentPage)"
+        @click="onLastPage"
       >
-        Last
+        Last page
       </button>
     </ul>
   </div>
