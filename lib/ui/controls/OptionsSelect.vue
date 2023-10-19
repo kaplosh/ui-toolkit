@@ -16,8 +16,6 @@ const props = withDefaults(
   },
 );
 
-console.log(typeof props.options);
-
 const emits = defineEmits([ 'update:modelValue' ]);
 
 const rootProps = computed(() => ({
@@ -75,7 +73,10 @@ function onSetOption(option: ui.OptionItem<ui.Record>, selected: boolean): void 
     v-else
     v-bind="rootProps"
   >
-    <slot name="input" class="list-group-item" />
+    <slot
+      name="input"
+      class="list-group-item"
+    />
     <li
       v-for="option of options"
       :key="option.value"
@@ -89,7 +90,8 @@ function onSetOption(option: ui.OptionItem<ui.Record>, selected: boolean): void 
         :option="option"
         :selected="isSelected(option)"
       />
-      <span v-else>{{ option.item||option.caption }}</span>
+      <span v-if="option.item.caption"> {{ option.item.caption }} </span>
+      <span v-else>{{ option.item }}</span>
     </li>
   </ul>
 </template>

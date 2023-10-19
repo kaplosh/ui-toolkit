@@ -14,9 +14,9 @@ const allOptions = [
   { value: '6', item: 'Jakakoliv Ex Tveho Výběru' },
 ];
 
-const allRecords: ui.Record[] = [
-  { id: '1', caption: 'Jednička' },
-  { id: '2', caption: 'Dvojka' },
+const allRecords: ui.OptionItem<ui.Record>[] = [
+  { value: '1', item: { id: '1', caption: 'Jednička' } },
+  { value: '2', item: { id: '2', caption: 'Dvojka' } },
 ];
 
 const select1Values = ref([ allOptions[1] ]);

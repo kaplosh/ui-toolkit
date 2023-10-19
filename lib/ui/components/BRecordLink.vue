@@ -2,13 +2,13 @@
 import { ui } from '@ema/ui-toolkit';
 
 interface Props {
-  record: ui.Record;
+  record: ui.OptionItem<ui.Record>;
 }
 
 const props = defineProps<Props>();
 
 function path () {
-  return `/database/records/${props.record.id}`;
+  return `/database/records/${props.record.item.id}`;
 }
 
 </script>
@@ -18,6 +18,6 @@ function path () {
     :href="path"
     class="icon-link"
   >
-    &nbsp;{{ record.caption }}
+    &nbsp;{{ record.item.caption }}
   </a>
 </template>

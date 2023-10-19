@@ -25,7 +25,7 @@ function onChange (newValue) {
   emits('update:modelValue', newValue);
 }
 
-function onRemove (list: ui.OptionItem[], optionId) {
+function onRemove (list: ui.OptionItem<ui.Record>[], optionId) {
   updatedModelValue.value = list.filter(item => item.value !== optionId);
   onChange(updatedModelValue.value);
 }
