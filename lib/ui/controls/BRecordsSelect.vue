@@ -1,9 +1,7 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
 import { ref } from 'vue';
-import OptionsSelectDropdown from '../components/OptionsSelectDropdown.vue';
 import BRecordLink from '../components/BRecordLink.vue';
-import {Record} from "../types";
 
 interface Props {
   options: ui.OptionItem<ui.Record>[];

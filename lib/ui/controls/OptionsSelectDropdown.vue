@@ -4,8 +4,8 @@ import { ref } from 'vue';
 
 
 interface Props {
-  options: ui.OptionItem[];
-  modelValue: ui.OptionItem[];
+  options: ui.OptionItem<ui.Record>[];
+  modelValue: ui.OptionItem<ui.Record>[];
   multiple: boolean;
   menuMaxHeight?: number;
   rowMaxHeight?: number;
