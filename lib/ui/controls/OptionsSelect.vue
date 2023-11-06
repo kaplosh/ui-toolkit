@@ -3,8 +3,8 @@ import { ui } from '@ema/ui-toolkit';
 import { computed } from 'vue';
 
 interface Props {
-  options: ui.OptionItem[];
-  modelValue: ui.OptionItem[];
+  options: ui.OptionItem<ui.Record>[];
+  modelValue: ui.OptionItem<ui.Record>[];
   multiple: boolean;
   maxHeight?: number;
 }
@@ -23,17 +23,17 @@ const rootProps = computed(() => ({
   style: { maxHeight: `${props.maxHeight}px` },
 }));
 
-function isSelected(option: ui.OptionItem): boolean {
+function isSelected(option: ui.OptionItem<ui.Record>): boolean {
   return !!props.modelValue.find(
     ({ value }) => value === option.value,
   );
 }
 
-function onToggleOption(option: ui.OptionItem): void {
+function onToggleOption(option: ui.OptionItem<ui.Record>): void {
   onSetOption(option, !isSelected(option));
 }
 
-function onSetOption(option: ui.OptionItem, selected: boolean): void {
+function onSetOption(option: ui.OptionItem<ui.Record>, selected: boolean): void {
   let newValue;
 
   if (selected) {
@@ -73,6 +73,10 @@ function onSetOption(option: ui.OptionItem, selected: boolean): void {
     v-else
     v-bind="rootProps"
   >
+    <slot
+      name="input"
+      class="list-group-item"
+    />
     <li
       v-for="option of options"
       :key="option.value"
@@ -86,6 +90,7 @@ function onSetOption(option: ui.OptionItem, selected: boolean): void {
         :option="option"
         :selected="isSelected(option)"
       />
+      <span v-if="option.item.caption"> {{ option.item.caption }} </span>
       <span v-else>{{ option.item }}</span>
     </li>
   </ul>

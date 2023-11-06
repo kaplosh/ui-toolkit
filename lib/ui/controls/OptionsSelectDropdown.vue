@@ -1,21 +1,26 @@
 <script lang="ts" setup="">
 import { ui } from '@ema/ui-toolkit';
+import { ref } from 'vue';
 
 
 interface Props {
-  options: ui.OptionItem[];
-  modelValue: ui.OptionItem[];
+  options: ui.OptionItem<ui.Record>[];
+  modelValue: ui.OptionItem<ui.Record>[];
   multiple: boolean;
   menuMaxHeight?: number;
+  rowMaxHeight?: number;
   small?: boolean;
 }
 
+const props =
 withDefaults(
   defineProps<Props>(),
   {
     menuMaxHeight: 300,
+    rowMaxHeight: 60,
   },
 );
+
 
 const emits = defineEmits([ 'update:modelValue' ]);
 
@@ -30,7 +35,7 @@ function onChange (newValue: ui.OptionItem[]) {
     caret
     :small="small"
     :prepend-class="[
-      'border border-end-0 align-items-center overflow-hidden px-2',
+      'border border-end-0 align-items-center overflow-auto px-2',
     ]"
     custom-menu
   >
@@ -39,19 +44,19 @@ function onChange (newValue: ui.OptionItem[]) {
         v-if="$slots.prepend"
         name="prepend"
       />
-      <span
-        v-else-if="!multiple"
-        class="text-truncate"
-      >
-        {{ modelValue[0]?.item }}
-
-      </span>
-      <span
-        v-else-if="modelValue.length"
-        class="text-truncate"
-      >
-        [{{ modelValue.length }}]
-        {{ modelValue.map(option => option.item).join(', ') }}
+      <span class="text-truncate">
+        <span v-if="$slots.content">
+          <slot name="content" />
+        </span>
+        <span v-else>
+          <template v-if="!multiple">
+            {{ modelValue[0]?.item }}
+          </template>
+          <template v-else-if="modelValue.length">
+            [{{ modelValue.length }}]
+            {{ modelValue.map(option => option.item).join(', ') }}
+          </template>
+        </span>
       </span>
     </template>
     <ui.controls.OptionsSelect
@@ -61,6 +66,9 @@ function onChange (newValue: ui.OptionItem[]) {
       :max-height="menuMaxHeight"
       @update:modelValue="onChange"
     >
+      <template v-if="$slots['input']" #input>
+        <slot name="input" />
+      </template>
       <template
         v-if="$slots.option"
         #option="slotProps"

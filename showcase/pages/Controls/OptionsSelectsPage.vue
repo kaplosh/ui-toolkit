@@ -4,6 +4,7 @@ import PageExamplesSection from '../../components/PageExamplesSection.vue';
 import ExampleItem from '../../components/ExampleItem.vue';
 import { ref } from 'vue';
 
+
 const allOptions = [
   { value: '1', item: 'Hyenk Nguyen' },
   { value: '2', item: 'Vilem Vilemovich' },
@@ -11,6 +12,11 @@ const allOptions = [
   { value: '4', item: 'Lopata Lopatovich' },
   { value: '5', item: 'Schmetle Petlich' },
   { value: '6', item: 'Jakakoliv Ex Tveho Výběru' },
+];
+
+const allRecords: ui.OptionItem<ui.Record>[] = [
+  { value: '1', item: { id: '1', caption: 'Jednička' } },
+  { value: '2', item: { id: '2', caption: 'Dvojka' } },
 ];
 
 const select1Values = ref([ allOptions[1] ]);
@@ -21,7 +27,8 @@ const dropdown1Values = ref([ allOptions[2] ]);
 const dropdown2Values = ref(
   allOptions.filter(item => Number(item.value) % 3 === 0),
 );
-
+const select1Records = ref([ allRecords[1] ]);
+const select2Records = ref([ allRecords[1] ]);
 </script>
 
 <template>
@@ -94,6 +101,23 @@ const dropdown2Values = ref(
         <ui.controls.OptionsSelectDropdown
           v-model="dropdown2Values"
           :options="allOptions"
+          multiple
+        />
+      </exampleitem>
+    </PageExamplesSection>
+    <PageExamplesSection
+      title="B-Sections"
+    >
+      <ExampleItem text="B-Records Select">
+        <ui.controls.BRecordsSelect
+          :options="allRecords"
+          :model-value="select1Records"
+        />
+      </exampleitem>
+      <ExampleItem text="B-Records Select Multiple">
+        <ui.controls.BRecordsSelect
+          :options="allRecords"
+          :model-value="select2Records"
           multiple
         />
       </exampleitem>

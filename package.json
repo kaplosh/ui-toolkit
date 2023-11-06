@@ -11,6 +11,7 @@
     "url": "git+https://github.com/PIN-EMA/ui-toolkit.git"
   },
   "scripts": {
+    "show": "vite showcase -c vite.config.ts --no-clearScreen",
     "showcase": "vite showcase -c vite.config.ts --no-clearScreen",
     "test": "vitest"
   },
