@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { ui } from '@ema/ui-toolkit';
 import PageExamplesSection from '../../components/PageExamplesSection.vue';
+import ExampleItem from '../../components/ExampleItem.vue';
+import { ref } from 'vue';
+
+const datePicked = ref(new Date());
+const newDate = ref('');
+
+function onInput(date) {
+  newDate.value = date;
+}
 </script>
 
 <template>
@@ -12,7 +21,15 @@ import PageExamplesSection from '../../components/PageExamplesSection.vue';
     <PageExamplesSection
       title=""
     >
-      <!--      <ui.controls.DateSet />-->
+      <ExampleItem text="Default date set">
+        <ui.controls.DateInput
+          @on-change="onInput"
+        />
+        {{ newDate }}
+      </exampleitem>
+      <ExampleItem text="Library based date picker">
+        <ui.controls.DatePick v-model="datePicked" />
+      </ExampleItem>
     </PageExamplesSection>
   </div>
 </template>
